@@ -1,0 +1,382 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAFI Intelligence - Portal de Gestión</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#eff4ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#e0e0ff",
+                    "status-critical": "#EF4444",
+                    "tertiary-fixed": "#ffdad4",
+                    "tertiary-container": "#4d0000",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#6bff8f",
+                    "status-neutral": "#0F172A",
+                    "on-secondary-fixed": "#002109",
+                    "on-tertiary-container": "#d96756",
+                    "on-background": "#0b1c30",
+                    "secondary-fixed": "#6bff8f",
+                    "on-secondary-container": "#007432",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-fixed": "#00006e",
+                    "on-tertiary-fixed": "#410000",
+                    "surface-dim": "#cbdbf5",
+                    "primary-container": "#000080",
+                    "primary": "#00003c",
+                    "primary-fixed-dim": "#bfc2ff",
+                    "error-container": "#ffdad6",
+                    "surface-bg": "#F8FAFC",
+                    "surface-container-lowest": "#ffffff",
+                    "status-urgent": "#F97316",
+                    "surface-container": "#e5eeff",
+                    "brand-navy": "#000080",
+                    "secondary": "#006e2f",
+                    "brand-green": "#22C55E",
+                    "on-primary-container": "#777eea",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "secondary-fixed-dim": "#4ae176",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "inverse-primary": "#bfc2ff",
+                    "outline-variant": "#c6c5d5",
+                    "surface": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#82271c",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "on-surface": "#0b1c30",
+                    "on-primary-fixed-variant": "#3239a3",
+                    "status-warning": "#F59E0B",
+                    "on-surface-variant": "#464653",
+                    "background": "#f8f9ff",
+                    "tertiary": "#220000",
+                    "on-secondary-fixed-variant": "#005321",
+                    "surface-tint": "#4b53bc",
+                    "outline": "#767684",
+                    "surface-variant": "#d3e4fe",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "gutter-grid": "20px",
+                    "section-margin": "32px",
+                    "container-padding": "24px",
+                    "card-gap": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "mono-sm": ["Inter"],
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "mono-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .portal-grid-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .portal-grid-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-surface-bg text-on-surface font-body-md antialiased overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-0 right-0 z-50 h-16 bg-surface-container-lowest shadow-sm flex items-center justify-between px-8 border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<img alt="CAFI Intelligence Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa0yC5swiHVve1E8OopYuh8DO844lsYK_NDhH_N489kDDFhMOAF_H0nU1tpKjxxs2C1CHuCck8d_YGJavpzcV5gC0u0IfYMezeV4Q20pO4I1HWg5N-PYVWbtFw81u4t1WX0PEgOG0Mg8H9jejq65jFHyx3IfOZxOdanA1RCD8vEqdnyLmPpIj22u_fDzW75TOrEo4I9NOPNJVzVlJtmwJIo25v-TUnbrvEW2Gb1yfFasBxdQVlPODxtCWuwpNrXYWgWTkh2w0KQZY">
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<span class="font-headline-sm text-headline-sm text-brand-navy tracking-tight">Portal de Operaciones</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 px-3 py-1.5 bg-surface-container rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">online_prediction</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sistema Activo</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-sm">
+                    JS
+                </div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-6 lg:px-12 max-w-[1600px] mx-auto min-h-screen">
+<!-- Welcome Hero Section -->
+<section class="mb-section-margin">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 border-l-4 border-brand-navy pl-6 py-2">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-1">Bienvenido a CAFI Intelligence</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Gestione sus renovaciones y campañas de automatización desde un solo panel centralizado.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-brand-navy text-white rounded-lg font-bold hover:opacity-90 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined">add</span>
+<span>Nueva Renovación</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-brand-green text-white rounded-lg font-bold hover:opacity-90 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Ejecutar IA</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Module Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Dashboard Interactivo -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_17}}">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">dashboard</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Dashboard Interactivo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Visualice KPIs críticos y el estado global de la cartera en tiempo real.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Explorar métricas <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Gestión de Clientes -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_4}}">
+<div class="w-12 h-12 bg-surface-container-high text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">group</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Gestión de Clientes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Directorio completo con historial de pólizas y perfiles de riesgo.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Ver cartera <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Campañas de WhatsApp -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_13}}">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" style="transform: scale(1.1) rotate(5deg); transition: transform 0.2s;">campaign</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Campañas de WhatsApp</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Automatice el envío masivo de notificaciones y recordatorios.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Gestionar campañas <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Llamadas IA -->
+<a class="portal-grid-card group bg-primary-container text-white p-6 rounded-xl flex flex-col gap-4 shadow-lg border border-primary" href="{{DATA:SCREEN:SCREEN_5}}">
+<div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-white mb-1">Llamadas IA</h3>
+<p class="font-body-md text-body-md text-primary-fixed">Agentes de voz inteligentes para prospección y renovación telefónica.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-white font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Configurar agentes <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Calendario de Renovaciones -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_14}}">
+<div class="w-12 h-12 bg-surface-container text-on-surface-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">calendar_today</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Calendario de Renovaciones</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Cronograma visual de vencimientos y tareas de seguimiento.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Ver agenda <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Integraciones -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_20}}">
+<div class="w-12 h-12 bg-surface-container-high text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">settings_input_component</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Integraciones</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Conecte con ElevenLabs, Twilio, y otros CRMs externos.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Configurar API <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Nueva Renovación (Quick Action) -->
+<a class="portal-grid-card group bg-surface-container-lowest border-2 border-dashed border-outline p-6 rounded-xl flex flex-col gap-4 items-center justify-center text-center hover:bg-surface-bright" href="{{DATA:SCREEN:SCREEN_2}}">
+<div class="w-12 h-12 bg-brand-navy/10 text-brand-navy rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">post_add</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Nueva Renovación</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1 uppercase">Acceso Rápido</p>
+</div>
+</a>
+<!-- Subir Archivo Excel -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_12}}">
+<div class="w-12 h-12 bg-status-neutral/5 text-status-neutral rounded-lg flex items-center justify-center border border-status-neutral/10">
+<span class="material-symbols-outlined text-[28px]">upload_file</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Subir Archivo Excel</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Carga masiva de pólizas y carteras mediante plantillas .xlsx.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Importar datos <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Filtros Avanzados -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_8}}">
+<div class="w-12 h-12 bg-surface-container-low text-on-surface-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">filter_list</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Filtros Avanzados</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Segmentación precisa por ramo, vigencia y nivel de automatización.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Segmentar lista <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Perfil de Usuario -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_16}}">
+<div class="w-12 h-12 bg-surface-container-highest text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">account_circle</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Perfil de Usuario</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Ajustes de cuenta, preferencias de notificación e historial personal.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Mi perfil <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Configuración del Sistema -->
+<a class="portal-grid-card group bg-white border border-outline-variant p-6 rounded-xl flex flex-col gap-4" href="{{DATA:SCREEN:SCREEN_22}}">
+<div class="w-12 h-12 bg-outline-variant/20 text-on-surface rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">settings</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Configuración del Sistema</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Control administrativo global y parámetros de la plataforma CRM.</p>
+</div>
+<div class="mt-auto pt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                    Configuración <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</a>
+<!-- Placeholder / Extension -->
+<div class="portal-grid-card bg-surface-container-low/30 border border-outline-variant/30 p-6 rounded-xl flex flex-col items-center justify-center text-center opacity-60">
+<span class="material-symbols-outlined text-[48px] text-outline mb-2">more_horiz</span>
+<p class="font-label-md text-label-md text-outline">Nuevos módulos próximamente</p>
+</div>
+</div>
+<!-- System Status Summary -->
+<section class="mt-12 bg-white rounded-xl border border-outline-variant p-6 flex flex-wrap items-center justify-between gap-6 shadow-sm">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Uptime de IA</span>
+<span class="font-headline-sm text-headline-sm text-brand-green">99.9%</span>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Llamadas Hoy</span>
+<span class="font-headline-sm text-headline-sm text-primary">1,248</span>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">WhatsApp Pendientes</span>
+<span class="font-headline-sm text-headline-sm text-status-warning">14</span>
+</div>
+</div>
+<div class="glass-panel px-4 py-2 rounded-lg border border-brand-navy/10 flex items-center gap-3">
+<div class="relative w-3 h-3">
+<span class="absolute inset-0 bg-brand-green rounded-full animate-ping opacity-75"></span>
+<span class="relative block w-3 h-3 bg-brand-green rounded-full"></span>
+</div>
+<span class="font-mono-sm text-mono-sm font-bold text-brand-navy uppercase">Servidores Estables en LATAM-WEST</span>
+</div>
+</section>
+</main>
+<!-- Footer Identity -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant py-8 px-8">
+<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">CAFI</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Intelligence v2.4.0</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 Tu Casa Financiera S.A. Todos los derechos reservados.</p>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-end">
+<span class="font-label-md text-label-md text-brand-green font-bold uppercase tracking-wider">Listo para Producción</span>
+<span class="text-[10px] font-mono-sm text-on-surface-variant uppercase">Sincronizado: hace 4 minutos</span>
+</div>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Soporte Técnico</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Documentación API</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Términos Legales</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Simple Atmospheric Interaction Script -->
+<script>
+        document.querySelectorAll('.portal-grid-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                    icon.style.transition = 'transform 0.2s ease';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                }
+            });
+        });
+    </script>
+</body></html>

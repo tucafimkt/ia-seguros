@@ -1,0 +1,561 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAFI Intelligence - Filtro Avanzado</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filter-drawer-open {
+            transform: translateX(0);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .filter-drawer-closed {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .status-pill-success {
+            border-left: 4px solid #22C55E;
+        }
+        .status-pill-warning {
+            border-left: 4px solid #F59E0B;
+        }
+        .status-pill-critical {
+            border-left: 4px solid #EF4444;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#006e2f",
+                        "secondary-fixed": "#6bff8f",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00006e",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-tertiary-fixed": "#410000",
+                        "on-primary-container": "#777eea",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container": "#e5eeff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#d96756",
+                        "brand-green": "#22C55E",
+                        "tertiary": "#220000",
+                        "brand-navy": "#000080",
+                        "brand-orange": "#F97316",
+                        "secondary-fixed-dim": "#4ae176",
+                        "primary-container": "#000080",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed": "#002109",
+                        "inverse-primary": "#bfc2ff",
+                        "on-background": "#0b1c30",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#4b53bc",
+                        "inverse-surface": "#213145",
+                        "status-urgent": "#F97316",
+                        "status-critical": "#EF4444",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "secondary-container": "#6bff8f",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-low": "#eff4ff",
+                        "surface-bg": "#F8FAFC",
+                        "primary": "#00003c",
+                        "outline": "#767684",
+                        "status-warning": "#F59E0B",
+                        "on-tertiary-fixed-variant": "#82271c",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#bfc2ff",
+                        "outline-variant": "#c6c5d5",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#464653",
+                        "status-neutral": "#0F172A",
+                        "tertiary-container": "#4d0000",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed": "#e0e0ff",
+                        "on-surface": "#0b1c30",
+                        "on-secondary-fixed-variant": "#005321",
+                        "on-secondary-container": "#007432",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3239a3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "section-margin": "32px",
+                        "card-gap": "16px",
+                        "gutter-grid": "20px",
+                        "container-padding": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "mono-sm": ["Inter"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "mono-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-bg text-on-surface font-body-md min-h-screen flex overflow-hidden">
+<!-- Predicted SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant flex flex-col z-40">
+<div class="p-6">
+<h1 class="font-headline-sm text-headline-sm font-bold text-brand-navy flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-orange" style="font-variation-settings: 'FILL' 1;">shield</span>
+                CAFI Intelligence
+            </h1>
+<p class="text-[10px] font-label-md text-outline uppercase tracking-widest mt-1">Insurance CRM</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-white rounded-lg font-bold shadow-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">policy</span>
+<span class="font-label-md">Control de Pólizas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md">WhatsApp Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">record_voice_over</span>
+<span class="font-label-md">AI Calls</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md">Clients</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md">Calendar</span>
+</a>
+</nav>
+<div class="p-4 border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] flex-1 flex flex-col h-screen overflow-hidden relative">
+<!-- Predicted TopAppBar -->
+<header class="h-16 flex items-center justify-between px-8 bg-surface-container-lowest border-b border-outline-variant shrink-0">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 focus:ring-2 focus:ring-brand-navy/20 text-body-md outline-none" placeholder="Buscar por cliente, póliza o folio..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:bg-brand-navy hover:text-white transition-all font-label-md border border-outline-variant" onclick="toggleFilters()">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                    Filtros Avanzados
+                </button>
+<div class="w-px h-6 bg-outline-variant mx-2"></div>
+<button class="material-symbols-outlined text-outline hover:text-brand-navy">notifications</button>
+<div class="flex items-center gap-3 ml-2 cursor-pointer group">
+<div class="text-right">
+<p class="font-label-md text-on-surface leading-none group-hover:text-brand-navy transition-colors">Ana García</p>
+<p class="text-[10px] text-outline">Administrador</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-brand-orange shadow-sm object-cover" data-alt="A professional studio portrait of a female executive in her 30s with a confident smile, wearing business attire. The lighting is soft and flattering with a clean, high-end corporate backdrop. High-resolution photography focusing on the face with a warm and approachable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUWEPeXSDuWigFpMAWvgYZu3q_PuoaWoNvwmvE_rDR2DPveWriksEAqdaijdyndIVj41ThxL4MZAouM2vqp1VKZ4wXw5VZdcJdJNKudaXBGpPyhLB1r5acSJrFXd5HPSsCqsNHIE9gvM-UyCuwLV_AX2oxScIgpfpGbHxRv-MX2YrpDSumVCg36QGijJ5PosRrOOpPZvDMTQusEcRAPD6U75xBEGMDN8wPqkguEKqh-siTRr_5kTJaG7Gmt7VGBt-WJt23q0AoF5A">
+</div>
+</div>
+</header>
+<!-- Dynamic Content Area -->
+<section class="flex-1 p-8 overflow-y-auto custom-scrollbar">
+<!-- Breadcrumbs & Header -->
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-brand-navy">Control de Pólizas</h2>
+<p class="text-on-surface-variant flex items-center gap-2">
+<span class="text-brand-orange font-bold">1,284</span> pólizas activas en el sistema
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="bg-brand-navy text-white px-6 py-2.5 rounded-lg font-label-md flex items-center gap-2 shadow-lg shadow-brand-navy/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+                        Nueva Póliza
+                    </button>
+</div>
+</div>
+<!-- Active Filters Row -->
+<div class="flex flex-wrap gap-2 mb-6 min-h-[32px]" id="active-filters-container">
+<span class="text-[11px] font-bold text-outline uppercase self-center mr-2">Filtros Activos:</span>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high rounded-full text-on-surface-variant text-[12px] border border-outline-variant">
+<span class="font-semibold">Vencimiento:</span> Próximos 30 días
+                    <button class="material-symbols-outlined text-[14px] hover:text-error transition-colors">close</button>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high rounded-full text-on-surface-variant text-[12px] border border-outline-variant">
+<span class="font-semibold">Ramo:</span> Autos
+                    <button class="material-symbols-outlined text-[14px] hover:text-error transition-colors">close</button>
+</div>
+<button class="text-[12px] text-brand-navy font-bold hover:underline ml-2">Limpiar todo</button>
+</div>
+<!-- Table Implementation -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant">Aseguradora</th>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant">Cliente</th>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant">Póliza</th>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant text-center">Estatus</th>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant">Vence</th>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant">Prima</th>
+<th class="px-6 py-4 font-label-md text-outline uppercase tracking-wider border-b border-outline-variant text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Critical Item -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-white border border-outline-variant flex items-center justify-center p-1 overflow-hidden">
+<img class="max-w-full h-auto" data-alt="Corporate logo for AXA Insurance. A clean, minimalist blue and red geometric emblem on a pure white background. Minimalist Swiss design style with high contrast and sharp edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCExCsSNOKSiZGTgkaW6wXvnDimahJKK8HTETi5szQFfk7MjYRFxoSYltEeABx12dH9kSYJJhh5U5apIQMm8imAXMC_wdmKbJAkG6CMrXoJYvKHMqCuHzoe5E0e3qvTwTxah1MLkohYGUdXyQc6c_FG0Pkv7GPDHBIzk3g45B3C-h4tuMQ2d39ivOswHf9GqhfuNbrgo6yOWFssNI3ji4WmKu6zNCp1UQR4LKKaS1RoDwsJZyuaGjpSK3cdoQ0PiM20lstt01w78A8">
+</div>
+<span class="font-bold text-brand-navy">AXA Seguros</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-bold text-on-surface">Roberto Jiménez S.</p>
+<p class="text-[12px] text-outline">Renovación Pendiente</p>
+</td>
+<td class="px-6 py-4 font-mono-sm text-outline">POL-8823901-X</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-error-container text-on-error-container border border-error/20 status-pill-critical">CRÍTICO</span>
+</td>
+<td class="px-6 py-4">
+<p class="font-bold text-on-surface">12 Oct, 2023</p>
+<p class="text-[11px] text-status-critical font-bold">Faltan 2 días</p>
+</td>
+<td class="px-6 py-4 font-bold text-brand-navy">$14,250.00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-brand-navy/5 text-brand-navy transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 rounded-lg hover:bg-brand-green/10 text-brand-green transition-colors"><span class="material-symbols-outlined text-[20px]">chat</span></button>
+<button class="p-2 rounded-lg hover:bg-brand-orange/10 text-brand-orange transition-colors"><span class="material-symbols-outlined text-[20px]">call</span></button>
+</div>
+</td>
+</tr>
+<!-- Normal Item -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-white border border-outline-variant flex items-center justify-center p-1 overflow-hidden">
+<img class="max-w-full h-auto" data-alt="Corporate logo for GNP Seguros. A sophisticated Mexican insurance brand logo featuring their iconic flame symbol in orange. Professional, clean, vector-style presentation on white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZpBvfNYDaeg-Z6CoXpE1HmiGTTOSM2FK2z-AqCA2qfNXaXGA7FT4kg7kxqeEvWUVc7L3hvNakf738urOAdhfY-duM9uklh6hmYlwcZBMw0XxZiyc4-OV45blQ5z3PExrytHu1E16dMW_k-rh_MKDCk870BaFa4JAK-Ikx-yN7mmOanDaohOxIJM-Pv5OfzjqRcfr_fPIO2OkhT-8knl8X1MO8YnYhGRy3Xi4kvceKrtpWJt6ZJZ-y5TZzStxkEhmHk49cp-vU5_U">
+</div>
+<span class="font-bold text-brand-navy">GNP</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-bold text-on-surface">Lucía Mendoza</p>
+<p class="text-[12px] text-outline">Seguimiento AI</p>
+</td>
+<td class="px-6 py-4 font-mono-sm text-outline">POL-1002231-G</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-surface-container text-brand-navy border border-brand-navy/10 status-pill-warning">PENDIENTE</span>
+</td>
+<td class="px-6 py-4">
+<p class="font-bold text-on-surface">25 Oct, 2023</p>
+<p class="text-[11px] text-status-warning font-bold">Faltan 15 días</p>
+</td>
+<td class="px-6 py-4 font-bold text-brand-navy">$8,900.00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-brand-navy/5 text-brand-navy transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 rounded-lg hover:bg-brand-green/10 text-brand-green transition-colors"><span class="material-symbols-outlined text-[20px]">chat</span></button>
+<button class="p-2 rounded-lg hover:bg-brand-orange/10 text-brand-orange transition-colors"><span class="material-symbols-outlined text-[20px]">call</span></button>
+</div>
+</td>
+</tr>
+<!-- Success Item -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-white border border-outline-variant flex items-center justify-center p-1 overflow-hidden">
+<img class="max-w-full h-auto" data-alt="Corporate logo for Quálitas Insurance. A modern and strong typeface-based logo in shades of dark blue. Professional financial services aesthetic, minimalist and trustworthy, on plain white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4vdS0PlS4s8npx-Xb9ODzc19YufDzyCkd_onuj2LwdgaYrIpBE8SHhxnua315xNgj3itRROcQfhbXJR7NuDxRRzSsZ90ks8qGHkAJuTv_MU39RPlWoMKeLTikZdIdfDnQF-eIZIDwnDbNZaJA9OHHKFN_PsbI725-dpknyXk5Kh-i7gL1KigiK3SoWfLmPDqZQ_70ns4hXf8GkMMBtzT4WnU-kOhMTaWOv2YuIVGQfj30aKTFE716jK3N0svc35qBINY6AMB06UQ">
+</div>
+<span class="font-bold text-brand-navy">Quálitas</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-bold text-on-surface">Transportes Marín</p>
+<p class="text-[12px] text-outline">Flotilla Comercial</p>
+</td>
+<td class="px-6 py-4 font-mono-sm text-outline">Q-29388-FLOT</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-secondary-container text-on-secondary-container border border-secondary/20 status-pill-success">RENOVADO</span>
+</td>
+<td class="px-6 py-4">
+<p class="font-bold text-on-surface">15 Nov, 2024</p>
+<p class="text-[11px] text-brand-green font-bold">Vigente</p>
+</td>
+<td class="px-6 py-4 font-bold text-brand-navy">$102,400.00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-brand-navy/5 text-brand-navy transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 rounded-lg hover:bg-brand-green/10 text-brand-green transition-colors"><span class="material-symbols-outlined text-[20px]">chat</span></button>
+<button class="p-2 rounded-lg hover:bg-brand-orange/10 text-brand-orange transition-colors"><span class="material-symbols-outlined text-[20px]">call</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<p class="text-[12px] text-outline">Mostrando 1-15 de 1,284 resultados</p>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant bg-white text-outline hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-brand-navy text-white font-bold text-[12px]">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container-high transition-colors text-[12px]">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container-high transition-colors text-[12px]">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-outline">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant bg-white text-outline hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- SLIDE-OUT ADVANCED FILTER PANEL -->
+<div class="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-[50] opacity-0 pointer-events-none transition-opacity duration-300 overflow-hidden" id="filter-overlay" onclick="toggleFilters()"></div>
+<aside class="fixed right-0 top-0 h-full w-[400px] bg-white shadow-2xl z-[60] filter-drawer-closed flex flex-col" id="filter-drawer">
+<!-- Drawer Header -->
+<div class="p-6 border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-brand-navy">Filtro Avanzado</h3>
+<p class="text-[12px] text-outline">Personaliza tu vista de pólizas</p>
+</div>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-high flex items-center justify-center transition-colors" onclick="toggleFilters()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Drawer Content (Form) -->
+<div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
+<!-- Date Range Group -->
+<div class="space-y-3">
+<label class="block font-bold text-on-surface-variant text-[13px] uppercase tracking-wide">Rango de Vencimiento</label>
+<div class="grid grid-cols-2 gap-3">
+<div class="space-y-1">
+<span class="text-[11px] text-outline ml-1">Desde</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-[18px] text-outline">calendar_month</span>
+<input class="w-full pl-9 pr-2 py-2 border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-brand-navy/10 outline-none" type="date">
+</div>
+</div>
+<div class="space-y-1">
+<span class="text-[11px] text-outline ml-1">Hasta</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-[18px] text-outline">calendar_month</span>
+<input class="w-full pl-9 pr-2 py-2 border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-brand-navy/10 outline-none" type="date">
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 pt-1">
+<button class="px-3 py-1 rounded-full bg-surface-container-high text-[11px] text-on-surface-variant hover:bg-brand-navy hover:text-white transition-colors">Hoy</button>
+<button class="px-3 py-1 rounded-full bg-surface-container-high text-[11px] text-on-surface-variant hover:bg-brand-navy hover:text-white transition-colors">Próximos 7 días</button>
+<button class="px-3 py-1 rounded-full bg-brand-navy text-white text-[11px]">Próximos 30 días</button>
+</div>
+</div>
+<!-- Insurance Company Dropdown -->
+<div class="space-y-3">
+<label class="block font-bold text-on-surface-variant text-[13px] uppercase tracking-wide">Aseguradora</label>
+<div class="relative">
+<select class="w-full appearance-none px-4 py-2.5 border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-brand-navy/10 outline-none bg-white pr-10">
+<option>Todas las aseguradoras</option>
+<option>AXA Seguros</option>
+<option>GNP Seguros</option>
+<option>Quálitas</option>
+<option>Mapfre</option>
+<option>Chubb</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+<!-- Branch / Agent Row -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-3">
+<label class="block font-bold text-on-surface-variant text-[13px] uppercase tracking-wide">Sucursal</label>
+<select class="w-full px-4 py-2.5 border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-brand-navy/10 outline-none">
+<option>Matriz</option>
+<option>Norte</option>
+<option>Sur</option>
+</select>
+</div>
+<div class="space-y-3">
+<label class="block font-bold text-on-surface-variant text-[13px] uppercase tracking-wide">Asesor</label>
+<select class="w-full px-4 py-2.5 border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-brand-navy/10 outline-none">
+<option>Todos</option>
+<option>Ana García</option>
+<option>Luis Pérez</option>
+</select>
+</div>
+</div>
+<!-- Payment Method Chips -->
+<div class="space-y-3">
+<label class="block font-bold text-on-surface-variant text-[13px] uppercase tracking-wide">Método de Pago</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="relative flex items-center justify-center border border-outline-variant rounded-lg py-3 px-4 cursor-pointer hover:bg-surface-container-high transition-colors group">
+<input class="hidden peer" name="payment" type="checkbox">
+<div class="peer-checked:text-brand-navy peer-checked:bg-brand-navy/5 absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-brand-navy transition-all"></div>
+<span class="relative z-10 text-[13px] font-semibold text-on-surface-variant peer-checked:text-brand-navy">Contado</span>
+</label>
+<label class="relative flex items-center justify-center border border-outline-variant rounded-lg py-3 px-4 cursor-pointer hover:bg-surface-container-high transition-colors group">
+<input checked="" class="hidden peer" name="payment" type="checkbox">
+<div class="peer-checked:text-brand-navy peer-checked:bg-brand-navy/5 absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-brand-navy transition-all"></div>
+<span class="relative z-10 text-[13px] font-semibold text-on-surface-variant peer-checked:text-brand-navy">MSI (3, 6, 12)</span>
+</label>
+</div>
+</div>
+<!-- Policy Status Toggles -->
+<div class="space-y-3">
+<label class="block font-bold text-on-surface-variant text-[13px] uppercase tracking-wide">Estatus de Póliza</label>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-status-critical"></span>
+<span class="text-body-md font-medium">Crítico (Vence pronto)</span>
+</div>
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-brand-navy focus:ring-brand-navy/20" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-status-warning"></span>
+<span class="text-body-md font-medium">Pendiente / Seguimiento</span>
+</div>
+<input class="w-5 h-5 rounded border-outline-variant text-brand-navy focus:ring-brand-navy/20" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-brand-green"></span>
+<span class="text-body-md font-medium">Renovado / Vigente</span>
+</div>
+<input class="w-5 h-5 rounded border-outline-variant text-brand-navy focus:ring-brand-navy/20" type="checkbox">
+</label>
+</div>
+</div>
+<!-- Advanced Automation Switch -->
+<div class="p-4 bg-brand-navy/5 rounded-xl border border-brand-navy/10 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-brand-navy">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-bold text-[13px] uppercase tracking-wide">Filtro Asistido por AI</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value="">
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-orange"></div>
+</label>
+</div>
+<p class="text-[12px] text-on-surface-variant leading-relaxed">Priorizar automáticamente pólizas con mayor probabilidad de cancelación según el comportamiento histórico del cliente.</p>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="p-6 border-t border-outline-variant bg-surface-container-lowest grid grid-cols-2 gap-4">
+<button class="py-3 px-4 rounded-lg font-bold text-on-surface-variant hover:bg-surface-container-high border border-outline-variant transition-colors text-[14px]" onclick="toggleFilters()">
+                Limpiar Filtros
+            </button>
+<button class="py-3 px-4 rounded-lg font-bold bg-brand-navy text-white shadow-lg shadow-brand-navy/20 hover:scale-[1.02] active:scale-100 transition-all text-[14px]" onclick="toggleFilters()">
+                Aplicar Filtros
+            </button>
+</div>
+</aside>
+<script>
+        function toggleFilters() {
+            const drawer = document.getElementById('filter-drawer');
+            const overlay = document.getElementById('filter-overlay');
+            
+            if (drawer.classList.contains('filter-drawer-closed')) {
+                drawer.classList.remove('filter-drawer-closed');
+                drawer.classList.add('filter-drawer-open');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100', 'pointer-events-auto');
+            } else {
+                drawer.classList.remove('filter-drawer-open');
+                drawer.classList.add('filter-drawer-closed');
+                overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Ripple Effect for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '0px';
+                ripple.style.height = '0px';
+                ripple.style.background = 'rgba(255,255,255,0.3)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.transition = 'width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.style.width = Math.max(rect.width, rect.height) * 2 + 'px';
+                    ripple.style.height = Math.max(rect.width, rect.height) * 2 + 'px';
+                    ripple.style.opacity = '0';
+                }, 0);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 400);
+            });
+        });
+    </script>
+</body></html>

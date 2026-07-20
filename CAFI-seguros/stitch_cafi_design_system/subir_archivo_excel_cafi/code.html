@@ -1,0 +1,476 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Subir Archivo Excel - CAFI Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-hanken { font-family: 'Hanken Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { color: #000080; border-bottom: 2px solid #000080; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#006e2f",
+                      "secondary-fixed": "#6bff8f",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed": "#00006e",
+                      "tertiary-fixed": "#ffdad4",
+                      "on-tertiary-fixed": "#410000",
+                      "on-primary-container": "#777eea",
+                      "surface-variant": "#d3e4fe",
+                      "surface-container": "#e5eeff",
+                      "on-error-container": "#93000a",
+                      "surface": "#f8f9ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary-container": "#d96756",
+                      "brand-green": "#22C55E",
+                      "tertiary": "#220000",
+                      "brand-navy": "#000080",
+                      "brand-orange": "#F97316",
+                      "secondary-fixed-dim": "#4ae176",
+                      "primary-container": "#000080",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-secondary-fixed": "#002109",
+                      "inverse-primary": "#bfc2ff",
+                      "on-background": "#0b1c30",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#4b53bc",
+                      "inverse-surface": "#213145",
+                      "status-urgent": "#F97316",
+                      "status-critical": "#EF4444",
+                      "on-secondary": "#ffffff",
+                      "background": "#f8f9ff",
+                      "tertiary-fixed-dim": "#ffb4a8",
+                      "secondary-container": "#6bff8f",
+                      "surface-dim": "#cbdbf5",
+                      "surface-container-low": "#eff4ff",
+                      "surface-bg": "#F8FAFC",
+                      "primary": "#00003c",
+                      "outline": "#767684",
+                      "status-warning": "#F59E0B",
+                      "on-tertiary-fixed-variant": "#82271c",
+                      "surface-container-high": "#dce9ff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#bfc2ff",
+                      "outline-variant": "#c6c5d5",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#464653",
+                      "status-neutral": "#0F172A",
+                      "tertiary-container": "#4d0000",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary-fixed": "#e0e0ff",
+                      "on-surface": "#0b1c30",
+                      "on-secondary-fixed-variant": "#005321",
+                      "on-secondary-container": "#007432",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed-variant": "#3239a3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "section-margin": "32px",
+                      "card-gap": "16px",
+                      "gutter-grid": "20px",
+                      "container-padding": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Hanken Grotesk"],
+                      "label-md": ["Inter"],
+                      "mono-sm": ["Inter"],
+                      "headline-sm": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "mono-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface-bg text-on-surface overflow-hidden">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant flex flex-col p-4 shadow-sm z-10">
+<div class="mb-8 px-2">
+<h1 class="font-headline-sm text-headline-sm font-bold text-brand-navy">CAFI Intelligence</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Insurance CRM</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Clients</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-body-md text-body-md">WhatsApp Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">record_voice_over</span>
+<span class="font-body-md text-body-md">AI Calls</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md text-body-md">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-body-md text-body-md">Integrations</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="ml-[260px] flex justify-between items-center h-16 px-6 w-[calc(100%-260px)] bg-surface shadow-sm fixed top-0 z-10">
+<div class="flex items-center bg-surface-container-low px-3 py-1.5 rounded-full w-96 border border-outline-variant">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full ml-2" placeholder="Buscar clientes o pólizas..." type="text">
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a senior insurance executive, focused and friendly, wearing a dark navy suit. The lighting is crisp and modern with a soft-focus office environment in the background using a palette of whites and corporate blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnR8_vf4TYYoIsk1192dH0x0WWAdYaw5MEEGKSQ0McnuFA4nlKwUW39wQ6Djnwx4GREy5nw0o7Kn7bb-RnDOBkbu6O8c7I-X76X4xnWXZdd6juEEwm1NRiRboisT4jZnK3h2WqMHfkVfaA77wDr_aANeFkbIc5PGE74l6dhIdKTDB7ngI2fZyMrW0WhCBzyonD7WCVsLuymQ-aeYK3Z4KghBwIo4iCN14Ig4WoP-cCWur0ya0YAo79KSjiBChTsIhkauXaXArOtWo">
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Background) -->
+<main class="ml-[260px] mt-16 p-8 h-[calc(100vh-64px)] overflow-y-auto">
+<div class="max-w-[1600px] mx-auto">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-brand-navy">Cartera de Clientes</h2>
+<p class="text-on-surface-variant font-body-lg">Administra las renovaciones y seguimientos de pólizas.</p>
+</div>
+<button class="bg-brand-navy text-white px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 shadow-md hover:bg-primary transition-all">
+<span class="material-symbols-outlined">add</span>
+                    Nuevo Cliente
+                </button>
+</div>
+<!-- Dashboard Background Grid (Faded) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-card-gap mb-8 opacity-40 grayscale-[0.5]">
+<div class="bg-white p-6 rounded-xl border-t-4 border-status-critical shadow-sm">
+<p class="text-label-md font-label-md text-on-surface-variant">VENCIDAS</p>
+<p class="text-headline-lg font-hanken text-status-critical">14</p>
+<div class="mt-2 text-label-md text-status-critical flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +2 hoy
+                    </div>
+</div>
+<div class="bg-white p-6 rounded-xl border-t-4 border-status-urgent shadow-sm">
+<p class="text-label-md font-label-md text-on-surface-variant">PRÓX. 7 DÍAS</p>
+<p class="text-headline-lg font-hanken text-status-urgent">32</p>
+<div class="mt-2 text-label-md text-status-warning flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> Requiere Acción
+                    </div>
+</div>
+<div class="bg-white p-6 rounded-xl border-t-4 border-brand-green shadow-sm">
+<p class="text-label-md font-label-md text-on-surface-variant">RENOVADAS</p>
+<p class="text-headline-lg font-hanken text-brand-green">148</p>
+<div class="mt-2 text-label-md text-brand-green flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> 85% Eficiencia
+                    </div>
+</div>
+<div class="bg-white p-6 rounded-xl border-t-4 border-brand-navy shadow-sm">
+<p class="text-label-md font-label-md text-on-surface-variant">TOTAL CARTERA</p>
+<p class="text-headline-lg font-hanken text-brand-navy">1,204</p>
+<div class="mt-2 text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">group</span> Clientes Activos
+                    </div>
+</div>
+</div>
+<!-- Faded Table -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden opacity-30 pointer-events-none">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">CLIENTE</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">PÓLIZA</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">VENCIMIENTO</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high"></div>
+<div>
+<p class="font-bold text-brand-navy">Ricardo Mendoza</p>
+<p class="text-xs text-on-surface-variant">GNP Seguros</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">#4589201-B</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-status-critical/10 text-status-critical rounded text-xs font-bold uppercase">Hoy</span></td>
+<td class="px-6 py-4"><div class="flex gap-2"><div class="w-8 h-8 bg-surface-container-high rounded-full"></div><div class="w-8 h-8 bg-surface-container-high rounded-full"></div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- WORKFLOW MODAL OVERLAY -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-navy/30 backdrop-blur-sm" id="modal-overlay">
+<!-- Modal Container -->
+<div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[921px]">
+<!-- Modal Header -->
+<div class="px-8 py-6 border-b border-outline-variant flex justify-between items-center bg-surface">
+<div>
+<h3 class="font-headline-md text-headline-md text-brand-navy">Importar Datos de Cartera</h3>
+<p class="text-on-surface-variant font-body-md">Sube tu archivo de Excel para automatizar las renovaciones.</p>
+</div>
+<button class="text-outline hover:text-brand-navy transition-colors" onclick="document.getElementById('modal-overlay').classList.add('hidden')">
+<span class="material-symbols-outlined text-3xl">close</span>
+</button>
+</div>
+<!-- Stepper -->
+<div class="flex border-b border-outline-variant bg-surface-container-lowest">
+<div class="flex-1 py-4 px-8 flex items-center gap-3 border-b-2 border-brand-navy text-brand-navy font-bold" id="step-1-indicator">
+<span class="w-6 h-6 rounded-full bg-brand-navy text-white text-xs flex items-center justify-center">1</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Subir Archivo</span>
+</div>
+<div class="flex-1 py-4 px-8 flex items-center gap-3 text-on-surface-variant border-b-2 border-transparent" id="step-2-indicator">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface-variant text-xs flex items-center justify-center">2</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Mapeo de Columnas</span>
+</div>
+<div class="flex-1 py-4 px-8 flex items-center gap-3 text-on-surface-variant opacity-50">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface-variant text-xs flex items-center justify-center">3</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Validación</span>
+</div>
+</div>
+<!-- Modal Body: Step 1 (Upload) -->
+<div class="p-12 overflow-y-auto" id="step-1-content">
+<div class="border-2 border-dashed border-brand-navy/30 rounded-2xl p-16 flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-all cursor-pointer group" onclick="goToStep(2)">
+<div class="w-20 h-20 rounded-full bg-brand-navy/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl text-brand-navy">upload_file</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-brand-navy mb-2 text-center">Arrastra tu archivo aquí</h4>
+<p class="text-on-surface-variant text-center mb-8 max-w-sm">Aceptamos formatos .xlsx, .csv y .xls. Asegúrate de que la primera fila contenga los títulos.</p>
+<button class="bg-brand-navy text-white px-8 py-3 rounded-lg font-bold shadow-md">Seleccionar desde mi PC</button>
+<div class="mt-12 flex gap-8 items-center opacity-60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-green">verified_user</span>
+<span class="text-xs font-bold uppercase tracking-widest">Seguro</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-orange">bolt</span>
+<span class="text-xs font-bold uppercase tracking-widest">Rápido</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-widest">AI Ready</span>
+</div>
+</div>
+</div>
+<div class="mt-8 bg-brand-orange/5 p-4 rounded-xl flex items-start gap-4 border border-brand-orange/20">
+<span class="material-symbols-outlined text-brand-orange">info</span>
+<div>
+<p class="text-sm font-bold text-brand-orange">¿Necesitas ayuda?</p>
+<p class="text-xs text-on-surface-variant">Descarga nuestra <a class="underline font-bold" href="#">plantilla modelo</a> para asegurar una importación sin errores.</p>
+</div>
+</div>
+</div>
+<!-- Modal Body: Step 2 (Mapping) -->
+<div class="hidden flex-1 overflow-hidden flex flex-col" id="step-2-content">
+<div class="p-8 overflow-y-auto">
+<div class="mb-6 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-brand-green/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-green">file_present</span>
+</div>
+<div>
+<p class="font-bold text-brand-navy">Cartera_Renovaciones_2024.xlsx</p>
+<p class="text-xs text-on-surface-variant">1,240 filas detectadas</p>
+</div>
+</div>
+<button class="text-brand-navy text-sm font-bold hover:underline" onclick="goToStep(1)">Cambiar archivo</button>
+</div>
+<div class="bg-white rounded-xl border border-outline-variant">
+<div class="grid grid-cols-2 bg-surface-container-low px-6 py-3 border-b border-outline-variant font-label-md text-label-md text-on-surface-variant">
+<div>CAMPO DEL SISTEMA (CAFI)</div>
+<div>COLUMNA EN TU EXCEL</div>
+</div>
+<!-- Mapping Rows -->
+<div class="divide-y divide-outline-variant max-h-[400px] overflow-y-auto">
+<!-- Row 1: Name -->
+<div class="grid grid-cols-2 px-6 py-4 items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">person</span>
+<span class="font-bold text-brand-navy">Nombre del Cliente</span>
+<span class="text-[10px] bg-brand-navy text-white px-1.5 rounded uppercase font-black">Requerido</span>
+</div>
+<div class="relative">
+<select class="w-full bg-surface border border-outline-variant rounded-lg text-sm px-4 py-2 focus:ring-brand-navy focus:border-brand-navy">
+<option>Nombre_Completo</option>
+<option>Cliente</option>
+<option>Titular</option>
+</select>
+<div class="absolute right-3 top-2.5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-brand-green text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Phone -->
+<div class="grid grid-cols-2 px-6 py-4 items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">phone</span>
+<span class="font-bold text-brand-navy">Teléfono (WhatsApp)</span>
+<span class="text-[10px] bg-brand-navy text-white px-1.5 rounded uppercase font-black">Requerido</span>
+</div>
+<div>
+<select class="w-full bg-surface border border-outline-variant rounded-lg text-sm px-4 py-2 focus:ring-brand-navy focus:border-brand-navy border-brand-orange">
+<option disabled="" selected="" value="">-- Seleccionar columna --</option>
+<option>Celular_1</option>
+<option>Tel_Oficina</option>
+<option>Contacto</option>
+</select>
+<p class="text-[10px] text-brand-orange mt-1 font-bold">Autodetectado: Celular_1</p>
+</div>
+</div>
+<!-- Row 3: Car Brand -->
+<div class="grid grid-cols-2 px-6 py-4 items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">directions_car</span>
+<span class="font-bold text-brand-navy">Marca de Vehículo</span>
+</div>
+<div>
+<select class="w-full bg-surface border border-outline-variant rounded-lg text-sm px-4 py-2 focus:ring-brand-navy focus:border-brand-navy">
+<option>Marca</option>
+<option>Vehiculo_Desc</option>
+<option>Omitir este campo</option>
+</select>
+</div>
+</div>
+<!-- Row 4: Policy Number -->
+<div class="grid grid-cols-2 px-6 py-4 items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">description</span>
+<span class="font-bold text-brand-navy">Número de Póliza</span>
+</div>
+<div>
+<select class="w-full bg-surface border border-outline-variant rounded-lg text-sm px-4 py-2 focus:ring-brand-navy focus:border-brand-navy">
+<option>Poliza_No</option>
+<option>Contrato</option>
+<option>Referencia</option>
+</select>
+</div>
+</div>
+<!-- Row 5: Expiration Date -->
+<div class="grid grid-cols-2 px-6 py-4 items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">event_busy</span>
+<span class="font-bold text-brand-navy">Fecha de Vencimiento</span>
+<span class="text-[10px] bg-brand-navy text-white px-1.5 rounded uppercase font-black">Requerido</span>
+</div>
+<div>
+<select class="w-full bg-surface border border-outline-variant rounded-lg text-sm px-4 py-2 focus:ring-brand-navy focus:border-brand-navy">
+<option>Vigencia_Fin</option>
+<option>Vencimiento</option>
+<option>Fecha_Termino</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions Step 2 -->
+<div class="mt-auto p-6 bg-surface border-t border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-brand-green">check_circle</span>
+<span class="text-sm font-bold">12 campos mapeados correctamente</span>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 text-brand-navy font-bold hover:bg-surface-container-high rounded-lg transition-colors" onclick="goToStep(1)">Atrás</button>
+<button class="px-8 py-2.5 bg-brand-navy text-white font-bold rounded-lg shadow-lg hover:bg-primary active:scale-95 transition-all flex items-center gap-2">
+                            Siguiente Paso
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        function goToStep(step) {
+            const step1Content = document.getElementById('step-1-content');
+            const step2Content = document.getElementById('step-2-content');
+            const step1Ind = document.getElementById('step-1-indicator');
+            const step2Ind = document.getElementById('step-2-indicator');
+
+            if (step === 1) {
+                step1Content.classList.remove('hidden');
+                step2Content.classList.add('hidden');
+                
+                step1Ind.classList.add('border-brand-navy', 'text-brand-navy', 'font-bold');
+                step1Ind.querySelector('span:first-child').classList.replace('bg-surface-container-high', 'bg-brand-navy');
+                step1Ind.querySelector('span:first-child').classList.replace('text-on-surface-variant', 'text-white');
+                
+                step2Ind.classList.remove('border-brand-navy', 'text-brand-navy', 'font-bold');
+                step2Ind.classList.add('text-on-surface-variant', 'border-transparent');
+                step2Ind.querySelector('span:first-child').classList.replace('bg-brand-navy', 'bg-surface-container-high');
+                step2Ind.querySelector('span:first-child').classList.replace('text-white', 'text-on-surface-variant');
+            } else {
+                step1Content.classList.add('hidden');
+                step2Content.classList.remove('hidden');
+
+                step2Ind.classList.add('border-brand-navy', 'text-brand-navy', 'font-bold');
+                step2Ind.classList.remove('text-on-surface-variant', 'border-transparent');
+                step2Ind.querySelector('span:first-child').classList.replace('bg-surface-container-high', 'bg-brand-navy');
+                step2Ind.querySelector('span:first-child').classList.replace('text-on-surface-variant', 'text-white');
+
+                step1Ind.classList.remove('border-brand-navy', 'text-brand-navy', 'font-bold');
+                step1Ind.classList.add('text-on-surface-variant', 'border-transparent');
+                step1Ind.querySelector('span:first-child').classList.replace('bg-brand-navy', 'bg-surface-container-high');
+                step1Ind.querySelector('span:first-child').classList.replace('text-white', 'text-on-surface-variant');
+            }
+        }
+    </script>
+</body></html>

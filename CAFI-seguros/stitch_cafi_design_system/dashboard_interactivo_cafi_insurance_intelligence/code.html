@@ -1,0 +1,777 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAFI Insurance | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#d3e4fe",
+                    "on-secondary-fixed": "#002109",
+                    "inverse-primary": "#bfc2ff",
+                    "on-background": "#0b1c30",
+                    "primary-container": "#000080",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-container": "#d96756",
+                    "brand-green": "#22C55E",
+                    "tertiary": "#220000",
+                    "brand-navy": "#000080",
+                    "brand-orange": "#F97316",
+                    "secondary-fixed-dim": "#4ae176",
+                    "surface": "#f8f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#777eea",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container": "#e5eeff",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#00006e",
+                    "tertiary-fixed": "#ffdad4",
+                    "on-tertiary-fixed": "#410000",
+                    "secondary": "#006e2f",
+                    "secondary-fixed": "#6bff8f",
+                    "on-secondary-fixed-variant": "#005321",
+                    "on-secondary-container": "#007432",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#3239a3",
+                    "tertiary-container": "#4d0000",
+                    "inverse-on-surface": "#eaf1ff",
+                    "primary-fixed": "#e0e0ff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#bfc2ff",
+                    "outline-variant": "#c6c5d5",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#464653",
+                    "status-neutral": "#0F172A",
+                    "on-tertiary-fixed-variant": "#82271c",
+                    "surface-container-high": "#dce9ff",
+                    "surface-dim": "#cbdbf5",
+                    "surface-container-low": "#eff4ff",
+                    "surface-bg": "#F8FAFC",
+                    "primary": "#00003c",
+                    "outline": "#767684",
+                    "status-warning": "#F59E0B",
+                    "background": "#f8f9ff",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "secondary-container": "#6bff8f",
+                    "inverse-surface": "#213145",
+                    "status-urgent": "#F97316",
+                    "status-critical": "#EF4444",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#4b53bc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-margin": "32px",
+                    "card-gap": "16px",
+                    "gutter-grid": "20px",
+                    "container-padding": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "mono-sm": ["Inter"],
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "mono-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #F8FAFC; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .table-row-hover:hover { background-color: #F1F5F9; transition: all 0.2s ease; }
+        
+        /* New Interactive Styles */
+        .kpi-card:hover { transform: translateY(-4px); }
+        .kpi-card { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        
+        #loading-overlay { 
+            position: fixed; inset: 0; background: rgba(255,255,255,0.7); 
+            backdrop-filter: blur(4px); display: none; align-items: center; 
+            justify-content: center; z-index: 1000;
+        }
+
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #00003c; color: white; padding: 0.75rem 1.5rem; border-radius: 9999px;
+            font-size: 0.875rem; font-weight: 600; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        .active-sidebar-link {
+            color: #00003c !important; font-weight: 700 !important; border-right: 4px solid #00003c !important;
+            background-color: #eff4ff !important;
+        }
+
+        .sort-header:hover::after {
+            content: ' \2195'; opacity: 0.5; font-size: 0.8em;
+        }
+
+        .filter-active { background-color: #000080 !important; color: white !important; }
+
+        #notification-dropdown { display: none; }
+    </style>
+</head>
+<body class="text-on-surface" data-mode="connect">
+<!-- Loading Overlay -->
+<div id="loading-overlay" style="display: none;">
+<div class="flex flex-col items-center gap-3">
+<div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+<p class="font-bold text-primary">Cargando...</p>
+</div>
+</div>
+<!-- Toast Notification -->
+<div class="toast" id="toast">Navegando a Dashboard</div>
+<!-- Dialog / Modal -->
+<dialog class="rounded-xl shadow-2xl p-0 backdrop:bg-black/50 border-none max-w-md w-full" id="action-modal">
+<div class="p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm text-brand-navy" id="modal-title">Nueva Acción</h3>
+<button class="p-1 hover:bg-surface-container rounded-full" onclick="document.getElementById('action-modal').close()"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-4">
+<p class="text-body-md text-on-surface-variant">Esta es una interfaz de ejemplo. En la versión de producción, aquí aparecerá el formulario correspondiente.</p>
+<div class="flex gap-3 mt-8">
+<button class="flex-1 py-3 border border-outline-variant rounded-xl font-bold" onclick="document.getElementById('action-modal').close()">Cancelar</button>
+<button class="flex-1 py-3 bg-brand-navy text-white rounded-xl font-bold" onclick="document.getElementById('action-modal').close()">Entendido</button>
+</div>
+</div>
+</div>
+</dialog>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] border-r border-outline-variant bg-white flex flex-col py-6 space-y-4 z-50">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg flex items-center justify-center">
+<img alt="CAFI Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsb8hIMTHx1IHHU1M_558XQkSC-SBDeh1Yb14RCEW_T91qAtvW02XYePiFW0fXPGry1hmMSFcdf5weGFY85nsURxP0zIZmHLOpX_au-ekMgm3teqHuylZpInfOgec6qgcJhuboJkjIpjPDIROC-lDdrOT0tz3H3C1wA9j0cLaluHxsxl70J2oHpz_HuPe6vwoNSegfrqfK0NEdAdCrM4-t5r3s02dA1Skd6GBV0uCDBeIdaaQeW9Z3t57oPtk43F8TA6l9z_jkP9M">
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-brand-navy">CAFI Insurance</h1>
+<p class="text-label-md font-label-md text-on-surface-variant">Intelligence Platform</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1" id="sidebar-nav">
+<a class="nav-link flex items-center gap-3 px-4 py-3 transition-colors duration-200 active-sidebar-link" data-page="Dashboard" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" data-page="Campañas WhatsApp" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-body-md text-body-md">Campañas WhatsApp</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" data-page="Llamadas IA" href="#">
+<span class="material-symbols-outlined">robot_2</span>
+<span class="font-body-md text-body-md">Llamadas IA</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" data-page="Clientes" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md text-body-md">Clientes</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" data-page="Calendario" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md text-body-md">Calendario</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" data-page="Integraciones" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-body-md text-body-md">Integraciones</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-1 border-t border-outline-variant pt-4">
+<button class="w-full flex items-center justify-center gap-2 bg-brand-navy text-white py-3 rounded-xl font-body-md text-body-md font-bold active:scale-95 transition-all" onclick="openModal('Nueva Renovación')">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Nueva Renovación
+            </button>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors" data-page="Configuración" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Configuración</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors" data-page="Ayuda" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Ayuda</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] z-40 bg-white/80 backdrop-blur-md border-b border-outline-variant shadow-sm h-16 flex justify-between items-center px-8">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-body-md font-body-md transition-all" id="main-search" placeholder="Buscar póliza, cliente o vehículo..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6 ml-8">
+<div class="flex gap-4 relative">
+<button class="text-on-surface-variant hover:text-primary transition-all relative" id="notification-btn">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full" id="notif-badge"></span>
+</button>
+<!-- Notification Dropdown -->
+<div class="absolute top-full right-0 mt-2 w-64 bg-white border border-outline-variant rounded-xl shadow-xl p-4 z-[60]" id="notification-dropdown" style="display: none;">
+<h4 class="font-bold text-body-md mb-2">Notificaciones</h4>
+<div class="space-y-3">
+<div class="text-label-md p-2 bg-surface-container-low rounded-lg">Póliza #452 vence en 2 días</div>
+<div class="text-label-md p-2 bg-surface-container-low rounded-lg">Nueva transcripción de IA lista</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-all" onclick="showToast('Abriendo historial...')">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold group-hover:text-primary transition-colors">Juan Administrador</p>
+<p class="text-label-md font-label-md text-on-surface-variant">Sucursal CDMX</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlhlOIhfcrvsloh-xxZsc1Nd-SIgDfxo6pfErp9JknS5fglEa8HUdAcs3FI9y4d4X6J058Y9URlkQ7V8phQyeK08eXnRsH8J5vBSNV4CVNZZk6y00XaSHc6RyvSK2n-nfHJlTskWfoS2ZZjdmEvbQrFQZBm3uFgNdRukH3j3iZkGCCOd42AQwb_azOiiUKSbq3L4iVJwYxftma5h5_xnYAgyic3iBwYqJ3QFgU0ChEVqqcvjEQZA_KOH3tnGgjtbRPv49RS8OF0AQ">
+</div>
+</div>
+</header>
+<div class="pt-24 px-8 pb-12 space-y-8 max-w-[1600px] mx-auto">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-brand-navy" id="page-title">Dashboard</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Gestión inteligente de cartera y automatización de avisos.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 bg-surface-container-highest text-primary font-bold px-6 py-3 rounded-xl hover:shadow-md transition-all" onclick="showToast('Abriendo filtros avanzados...')">
+<span class="material-symbols-outlined">filter_list</span>
+                        Filtros Avanzados
+                    </button>
+<button class="flex items-center gap-2 bg-brand-green text-white font-bold px-6 py-3 rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all" onclick="openModal('Importar Archivo Excel')">
+<span class="material-symbols-outlined">upload_file</span>
+                        Subir archivo Excel
+                    </button>
+</div>
+</div>
+<!-- KPIs Section (Bento Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-grid">
+<!-- Total Pólizas -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-brand-navy">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="text-brand-green font-bold text-label-md">+4.5% mes</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Total Pólizas</p>
+<h3 class="font-headline-lg text-headline-lg mt-1">1,240</h3>
+</div>
+<!-- Vencen < 30 -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant border-l-4 border-l-brand-green shadow-sm cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-green-50 rounded-lg text-brand-green">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Vencen &lt; 30 días</p>
+<h3 class="font-headline-lg text-headline-lg mt-1">450</h3>
+</div>
+<!-- Vencen < 15 -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant border-l-4 border-l-status-warning shadow-sm cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-amber-50 rounded-lg text-status-warning">
+<span class="material-symbols-outlined">notification_important</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Vencen &lt; 15 días</p>
+<h3 class="font-headline-lg text-headline-lg mt-1 text-status-warning">180</h3>
+</div>
+<!-- Vencen < 7 -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant border-l-4 border-l-status-urgent shadow-sm cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-50 rounded-lg text-status-urgent">
+<span class="material-symbols-outlined">warning</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Vencen &lt; 7 días</p>
+<h3 class="font-headline-lg text-headline-lg mt-1 text-status-urgent">45</h3>
+</div>
+<!-- Vencidas -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant border-l-4 border-l-status-critical shadow-sm cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-red-50 rounded-lg text-status-critical">
+<span class="material-symbols-outlined">error</span>
+</div>
+<span class="text-status-critical font-bold text-label-md">Crítico</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Vencidas</p>
+<h3 class="font-headline-lg text-headline-lg mt-1 text-status-critical">12</h3>
+</div>
+<!-- WhatsApps -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant shadow-sm cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-[#25D366]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+</div>
+<span class="text-brand-green font-bold text-label-md">92% Tasa entrega</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">WhatsApps Enviados</p>
+<h3 class="font-headline-lg text-headline-lg mt-1">890</h3>
+</div>
+<!-- Llamadas IA -->
+<div class="kpi-card bg-white p-6 rounded-xl border border-outline-variant shadow-sm cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-primary">
+<span class="material-symbols-outlined">robot_2</span>
+</div>
+<div class="flex items-center gap-1 text-brand-green font-bold text-label-md">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+                            AI Active
+                        </div>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Llamadas IA</p>
+<h3 class="font-headline-lg text-headline-lg mt-1">320</h3>
+</div>
+<!-- Renovaciones -->
+<div class="kpi-card bg-brand-navy p-6 rounded-xl shadow-lg relative overflow-hidden cursor-default" style="transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-white/10 rounded-lg text-white">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+</div>
+</div>
+<p class="text-white/70 font-label-md text-label-md uppercase tracking-wider">Renovaciones Cerradas</p>
+<h3 class="font-headline-lg text-headline-lg mt-1 text-white">156</h3>
+<div class="mt-4 w-full bg-white/20 h-1.5 rounded-full">
+<div class="bg-brand-green h-1.5 rounded-full w-[65%]"></div>
+</div>
+</div>
+<div class="absolute -bottom-4 -right-4 opacity-10">
+<span class="material-symbols-outlined text-[100px] text-white">handshake</span>
+</div>
+</div>
+</div>
+<!-- Filters Quick Bar -->
+<div class="flex flex-wrap gap-4 items-center bg-white p-4 rounded-xl border border-outline-variant" id="filter-bar">
+<span class="text-body-md font-body-md font-bold text-on-surface-variant mr-2">Filtros Rápidos:</span>
+<button class="filter-chip px-4 py-2 bg-surface-container-low rounded-lg text-body-md transition-all hover:bg-surface-container">Todas las Sucursales</button>
+<button class="filter-chip px-4 py-2 bg-surface-container-low rounded-lg text-body-md transition-all hover:bg-surface-container">Todas las Aseguradoras</button>
+<button class="filter-chip px-4 py-2 bg-surface-container-low rounded-lg text-body-md transition-all hover:bg-surface-container">Todos los Estados</button>
+</div>
+<!-- Main Data Table -->
+<div class="bg-white rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-brand-navy">Control de Pólizas</h3>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors" onclick="showToast('Exportando datos...')"><span class="material-symbols-outlined">download</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors" onclick="showToast('Imprimiendo vista actual...')"><span class="material-symbols-outlined">print</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="policy-table">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="sort-header px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider cursor-pointer">Nombre</th>
+<th class="sort-header px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider cursor-pointer">Vehículo</th>
+<th class="sort-header px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider cursor-pointer">Aseguradora</th>
+<th class="sort-header px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider cursor-pointer">Vencimiento</th>
+<th class="sort-header px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider cursor-pointer">Días</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-center">Estado</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Green -->
+<tr class="table-row-hover policy-row">
+<td class="px-6 py-4 border-l-4 border-l-brand-green">
+<p class="font-body-md text-body-md font-bold row-name">Juan Pérez</p>
+<p class="text-label-md font-label-md text-on-surface-variant">5512-345-678</p>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md">Toyota Corolla</p>
+<p class="text-label-md font-label-md text-on-surface-variant">2022 • Particular</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-md font-label-md text-brand-navy">Qualitas</span>
+</td>
+<td class="px-6 py-4 text-body-md font-body-md">25 Mar, 2024</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-brand-green font-bold text-body-md">
+<span class="material-symbols-outlined text-[16px]">circle</span> 35 días
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-green-100 text-brand-green rounded-md text-label-md font-bold">Al día</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-[#25D366]/10 text-[#25D366] transition-colors" onclick="showToast('Iniciando WhatsApp con Juan Pérez...')" title="Chat WhatsApp"><span class="material-symbols-outlined">chat</span></button>
+<button class="p-2 rounded-lg hover:bg-primary/10 text-primary transition-colors" onclick="showToast('Llamando a Juan Pérez...')" title="Llamar"><span class="material-symbols-outlined">call</span></button>
+<button class="p-2 rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" onclick="showToast('Opciones adicionales...')"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Yellow -->
+<tr class="table-row-hover policy-row">
+<td class="px-6 py-4 border-l-4 border-l-status-warning">
+<p class="font-body-md text-body-md font-bold row-name">María García</p>
+<p class="text-label-md font-label-md text-on-surface-variant">5598-765-432</p>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md">Honda Civic</p>
+<p class="text-label-md font-label-md text-on-surface-variant">2021 • Particular</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-md font-label-md text-brand-navy">AXA</span>
+</td>
+<td class="px-6 py-4 text-body-md font-body-md">10 Mar, 2024</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-status-warning font-bold text-body-md">
+<span class="material-symbols-outlined text-[16px]">circle</span> 20 días
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-amber-100 text-status-warning rounded-md text-label-md font-bold">Aviso enviado</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-[#25D366]/10 text-[#25D366] transition-colors" onclick="showToast('Iniciando WhatsApp con María García...')"><span class="material-symbols-outlined">chat</span></button>
+<button class="p-2 rounded-lg hover:bg-primary/10 text-primary transition-colors" onclick="showToast('Llamando a María García...')"><span class="material-symbols-outlined">call</span></button>
+<button class="p-2 rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" onclick="showToast('Opciones adicionales...')"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Orange -->
+<tr class="table-row-hover policy-row">
+<td class="px-6 py-4 border-l-4 border-l-status-urgent">
+<p class="font-body-md text-body-md font-bold row-name">Roberto Ruiz</p>
+<p class="text-label-md font-label-md text-on-surface-variant">5544-332-211</p>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md">Ford Lobo</p>
+<p class="text-label-md font-label-md text-on-surface-variant">2023 • Carga</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-md font-label-md text-brand-navy">Mapfre</span>
+</td>
+<td class="px-6 py-4 text-body-md font-body-md">02 Mar, 2024</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-status-urgent font-bold text-body-md">
+<span class="material-symbols-outlined text-[16px]">circle</span> 12 días
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-orange-100 text-status-urgent rounded-md text-label-md font-bold">Urgente</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-[#25D366]/10 text-[#25D366] transition-colors" onclick="showToast('Iniciando WhatsApp con Roberto Ruiz...')"><span class="material-symbols-outlined">chat</span></button>
+<button class="p-2 rounded-lg bg-primary text-white transition-all shadow-md hover:shadow-lg" onclick="showToast('Iniciando Llamada IA para Roberto...')"><span class="material-symbols-outlined">robot_2</span></button>
+<button class="p-2 rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" onclick="showToast('Opciones adicionales...')"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Red -->
+<tr class="table-row-hover policy-row">
+<td class="px-6 py-4 border-l-4 border-l-status-critical">
+<p class="font-body-md text-body-md font-bold row-name">Ana López</p>
+<p class="text-label-md font-label-md text-on-surface-variant">5566-778-899</p>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md">Mazda 3</p>
+<p class="text-label-md font-label-md text-on-surface-variant">2020 • Particular</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-md font-label-md text-brand-navy">GNP</span>
+</td>
+<td class="px-6 py-4 text-body-md font-body-md">22 Feb, 2024</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-status-critical font-bold text-body-md">
+<span class="material-symbols-outlined text-[16px]">circle</span> 4 días
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-red-100 text-status-critical rounded-md text-label-md font-bold">Crítico</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-error/10 text-error transition-colors" onclick="showToast('Alerta enviada a Ana López')"><span class="material-symbols-outlined">emergency</span></button>
+<button class="p-2 rounded-lg bg-primary text-white transition-all shadow-md" onclick="showToast('Iniciando Llamada IA prioritaria...')"><span class="material-symbols-outlined">robot_2</span></button>
+<button class="p-2 rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" onclick="showToast('Opciones adicionales...')"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Black -->
+<tr class="table-row-hover bg-slate-50 policy-row">
+<td class="px-6 py-4 border-l-4 border-l-status-neutral">
+<p class="font-body-md text-body-md font-bold text-status-neutral row-name">Carlos Slim</p>
+<p class="text-label-md font-label-md text-on-surface-variant">5555-555-555</p>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md">BMW X5</p>
+<p class="text-label-md font-label-md text-on-surface-variant">2024 • Particular</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-md font-label-md text-brand-navy">Inbursa</span>
+</td>
+<td class="px-6 py-4 text-body-md font-body-md text-status-neutral font-bold">15 Feb, 2024</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-status-neutral font-extrabold text-body-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">cancel</span> Vencido
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-slate-900 text-white rounded-md text-label-md font-bold">Expirado</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 rounded-lg hover:bg-primary/10 text-primary transition-colors" onclick="showToast('Intentando recuperar póliza...')"><span class="material-symbols-outlined">undo</span></button>
+<button class="p-2 rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" onclick="showToast('Opciones adicionales...')"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-outline-variant flex justify-between items-center bg-white">
+<p class="text-body-md text-on-surface-variant">Mostrando <span class="font-bold" id="visible-count">5</span> de <span class="font-bold">1,240</span> pólizas</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-body-md hover:bg-surface-container transition-all" onclick="showToast('Anterior')">Anterior</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-body-md hover:shadow-md transition-all" onclick="showToast('Siguiente')">Siguiente</button>
+</div>
+</div>
+</div>
+<!-- Bottom Grid: Automation & AI Insights -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter-grid">
+<!-- Automation Rules Card -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-outline-variant bg-surface-bright flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-brand-navy">Reglas de Automatización</h3>
+<span class="px-3 py-1 bg-brand-green/10 text-brand-green text-label-md font-bold rounded-full">Activo</span>
+</div>
+<div class="p-6 space-y-6 flex-1">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#25D366]">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold">30 días antes</p>
+<p class="text-label-md text-on-surface-variant">Enviar WhatsApp preventivo con datos de póliza.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer automation-toggle" data-rule="30 días" type="checkbox">
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">robot_2</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold">7 días antes</p>
+<p class="text-label-md text-on-surface-variant">WhatsApp Urgente + Llamada IA (ElevenLabs).</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer automation-toggle" data-rule="7 días" type="checkbox">
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-orange-50 border border-orange-200 rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-status-urgent">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold">Vencimiento Hoy</p>
+<p class="text-label-md text-on-surface-variant">Notificación crítica y llamada prioritaria a asesor.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer automation-toggle" data-rule="Vencimiento Hoy" type="checkbox">
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- AI Insights / Transcription Summary -->
+<div class="bg-primary-container p-6 rounded-xl shadow-lg text-white flex flex-col h-full overflow-hidden relative">
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-brand-green">smart_toy</span>
+<h3 class="font-headline-md text-headline-md">AI Insights</h3>
+</div>
+<div class="space-y-4 flex-1">
+<div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/5">
+<p class="text-label-md font-bold text-brand-green uppercase mb-2">Última Llamada IA</p>
+<p class="font-body-md italic text-white/90">"El cliente Juan Pérez está interesado en renovar con Qualitas, solicita plan a 12 MSI. Agendar seguimiento para mañana 10 AM."</p>
+<div class="mt-3 flex items-center gap-2 text-label-md text-white/60">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                                    Hace 5 min • Transcrito por ElevenLabs
+                                </div>
+</div>
+<div class="space-y-3">
+<p class="text-label-md font-bold uppercase text-white/70">Probabilidad de Cierre</p>
+<div class="flex items-center gap-4">
+<div class="flex-1 bg-white/20 h-2 rounded-full">
+<div class="bg-brand-orange h-2 rounded-full w-[82%] transition-all duration-1000"></div>
+</div>
+<span class="font-bold text-brand-orange">82%</span>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-white text-primary font-bold rounded-xl hover:bg-brand-orange hover:text-white transition-all active:scale-95" onclick="showToast('Abriendo reporte de IA...')">
+                            Ver reporte completo
+                        </button>
+</div>
+<!-- Background Pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 20px 20px;"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button for AI Trigger -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-brand-orange text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-50 group" onclick="showToast('Iniciando campaña masiva de IA...')">
+<span class="material-symbols-outlined text-[32px] group-hover:rotate-12 transition-transform">bolt</span>
+<span class="absolute right-20 bg-brand-navy text-white px-4 py-2 rounded-lg text-body-md font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">Ejecutar Campaña IA</span>
+</button>
+<script>
+    // --- Utilities ---
+    const showToast = (message) => {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    };
+
+    const openModal = (title) => {
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('action-modal').showModal();
+    };
+
+    const toggleLoading = (callback) => {
+        const loader = document.getElementById('loading-overlay');
+        loader.style.display = 'flex';
+        setTimeout(() => {
+            loader.style.display = 'none';
+            if(callback) callback();
+        }, 800);
+    };
+
+    // --- 1. Navigation System ---
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageName = this.getAttribute('data-page');
+            
+            toggleLoading(() => {
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-sidebar-link', 'text-primary', 'font-bold'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.add('text-on-surface-variant'));
+                
+                this.classList.add('active-sidebar-link');
+                this.classList.remove('text-on-surface-variant');
+                
+                document.getElementById('page-title').textContent = pageName;
+                document.title = `CAFI Insurance | ${pageName}`;
+                showToast(`Navegando a ${pageName}`);
+            });
+        });
+    });
+
+    // --- 2. Filter Chips ---
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+            this.classList.toggle('filter-active');
+            const isActive = this.classList.contains('filter-active');
+            showToast(isActive ? `Filtro "${this.textContent}" aplicado` : `Filtro "${this.textContent}" removido`);
+        });
+    });
+
+    // --- 5. Automation Toggles ---
+    document.querySelectorAll('.automation-toggle').forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const ruleName = this.getAttribute('data-rule');
+            showToast(`Regla "${ruleName}" ${this.checked ? 'activada' : 'desactivada'}`);
+        });
+    });
+
+    // --- 6. Search Bar Filtering ---
+    const searchInput = document.getElementById('main-search');
+    const tableRows = document.querySelectorAll('.policy-row');
+    const visibleCountText = document.getElementById('visible-count');
+
+    searchInput.addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+            const name = row.querySelector('.row-name').textContent.toLowerCase();
+            const matches = name.includes(term);
+            row.style.display = matches ? '' : 'none';
+            if(matches) visibleCount++;
+        });
+
+        visibleCountText.textContent = visibleCount;
+    });
+
+    // --- 7. Notifications Dropdown ---
+    const notifBtn = document.getElementById('notification-btn');
+    const notifDropdown = document.getElementById('notification-dropdown');
+    const notifBadge = document.getElementById('notif-badge');
+
+    notifBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = notifDropdown.style.display === 'block';
+        notifDropdown.style.display = isOpen ? 'none' : 'block';
+        if(!isOpen) notifBadge.style.display = 'none';
+    });
+
+    // Close dropdown on click outside
+    document.addEventListener('click', () => {
+        notifDropdown.style.display = 'none';
+    });
+
+    // --- Table Sorting Mock ---
+    document.querySelectorAll('.sort-header').forEach(header => {
+        header.addEventListener('click', () => {
+            showToast(`Ordenando por ${header.textContent.trim()}...`);
+        });
+    });
+
+    // Micro-interaction on KPIs (Pulse logic)
+    const kpiCards = document.querySelectorAll('.kpi-card');
+    kpiCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)";
+        });
+    });
+</script>
+</body></html>

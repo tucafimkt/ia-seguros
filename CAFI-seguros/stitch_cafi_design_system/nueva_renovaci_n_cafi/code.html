@@ -1,0 +1,431 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nueva Renovación | CAFI Insurance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#d96756",
+                    "status-critical": "#EF4444",
+                    "status-urgent": "#F97316",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "tertiary-fixed": "#ffdad4",
+                    "primary": "#00003c",
+                    "brand-navy": "#000080",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#6bff8f",
+                    "on-secondary-container": "#007432",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#0b1c30",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "inverse-surface": "#213145",
+                    "outline": "#767684",
+                    "secondary-fixed-dim": "#4ae176",
+                    "surface-variant": "#d3e4fe",
+                    "on-primary-container": "#777eea",
+                    "inverse-primary": "#bfc2ff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#e0e0ff",
+                    "status-neutral": "#0F172A",
+                    "surface-container-highest": "#d3e4fe",
+                    "tertiary-container": "#4d0000",
+                    "on-error": "#ffffff",
+                    "brand-green": "#22C55E",
+                    "on-surface-variant": "#464653",
+                    "outline-variant": "#c6c5d5",
+                    "surface": "#f8f9ff",
+                    "surface-tint": "#4b53bc",
+                    "error": "#ba1a1a",
+                    "tertiary": "#220000",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container": "#e5eeff",
+                    "primary-container": "#000080",
+                    "primary-fixed-dim": "#bfc2ff",
+                    "surface-dim": "#cbdbf5",
+                    "on-tertiary-fixed-variant": "#82271c",
+                    "status-warning": "#F59E0B",
+                    "surface-bg": "#F8FAFC",
+                    "secondary": "#006e2f",
+                    "on-tertiary-fixed": "#410000",
+                    "secondary-container": "#6bff8f",
+                    "on-primary-fixed": "#00006e",
+                    "on-background": "#0b1c30",
+                    "on-secondary-fixed-variant": "#005321",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed-variant": "#3239a3"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "mono-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-panel { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.8); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .progress-line { transition: width 0.5s ease-in-out; }
+    </style>
+</head>
+<body class="bg-surface-bg font-body-md text-on-surface min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+<!-- Task-Focused Background Elements (Subtle Decorative Gradients) -->
+<div class="fixed inset-0 z-0 pointer-events-none opacity-30">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-surface-container-high blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-navy/10 blur-[120px]"></div>
+</div>
+<!-- Main Modal Container -->
+<main class="relative z-10 w-full max-w-4xl bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant overflow-hidden flex flex-col md:flex-row min-h-[680px]">
+<!-- Left Panel: Progress and Context -->
+<aside class="w-full md:w-1/3 bg-brand-navy p-8 text-white flex flex-col justify-between relative overflow-hidden">
+<div class="relative z-10">
+<div class="mb-12">
+<h2 class="font-headline-md text-headline-md font-bold mb-2">Nueva Renovación</h2>
+<p class="text-white/70 font-body-md">Configure los detalles de la póliza y automatice el flujo de comunicación con IA.</p>
+</div>
+<!-- Vertical Progress Stepper -->
+<nav class="space-y-8">
+<div class="flex items-center gap-4 group" id="step-nav-1">
+<div class="w-10 h-10 rounded-full border-2 border-brand-green bg-brand-green flex items-center justify-center font-bold text-brand-navy" id="icon-1">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-white/50 uppercase tracking-wider">Paso 1</p>
+<p class="font-headline-sm text-headline-sm leading-tight">Datos del Cliente</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group opacity-50 transition-opacity duration-300" id="step-nav-2">
+<div class="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center font-bold" id="icon-2">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-white/50 uppercase tracking-wider">Paso 2</p>
+<p class="font-headline-sm text-headline-sm leading-tight">Vehículo</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group opacity-50 transition-opacity duration-300" id="step-nav-3">
+<div class="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center font-bold" id="icon-3">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-white/50 uppercase tracking-wider">Paso 3</p>
+<p class="font-headline-sm text-headline-sm leading-tight">Póliza</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group opacity-50 transition-opacity duration-300" id="step-nav-4">
+<div class="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center font-bold" id="icon-4">
+<span class="material-symbols-outlined text-[20px]">robot_2</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-white/50 uppercase tracking-wider">Paso 4</p>
+<p class="font-headline-sm text-headline-sm leading-tight">IA &amp; Automatización</p>
+</div>
+</div>
+</nav>
+</div>
+<div class="relative z-10 mt-12 p-4 bg-white/10 rounded-lg border border-white/10 backdrop-blur-sm">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-brand-green">info</span>
+<span class="font-label-md text-white">Tip de Eficiencia</span>
+</div>
+<p class="text-sm text-white/70">Las renovaciones con automatización activa de WhatsApp tienen una tasa de éxito 34% mayor.</p>
+</div>
+<!-- Decorative background for aside -->
+<div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+<div class="absolute -top-24 -right-24 w-64 h-64 border-[40px] border-white rounded-full"></div>
+</div>
+</aside>
+<!-- Right Panel: Form Area -->
+<section class="w-full md:w-2/3 p-8 md:p-12 flex flex-col justify-between">
+<!-- Close Button (Top Right) -->
+<button class="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">close</span>
+</button>
+<!-- Form Content Screens -->
+<div class="flex-grow" id="form-screens-container">
+<!-- STEP 1: CLIENT DATA -->
+<div class="step-transition" id="screen-1">
+<h3 class="font-headline-md text-headline-md text-brand-navy mb-8">Información del Asegurado</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-2">
+<label class="block font-label-md text-on-surface-variant mb-2">Nombre Completo</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none transition-all" placeholder="Ej. Juan Pérez García" type="text">
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Email</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="juan.perez@email.com" type="email">
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">WhatsApp / Teléfono</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="+52 55 0000 0000" type="tel">
+</div>
+<div class="col-span-2">
+<label class="block font-label-md text-on-surface-variant mb-2">ID de Cliente (Opcional)</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="REF-2023-XXXX" type="text">
+</div>
+</div>
+</div>
+<!-- STEP 2: VEHICLE INFO (Hidden by default) -->
+<div class="hidden step-transition" id="screen-2">
+<h3 class="font-headline-md text-headline-md text-brand-navy mb-8">Detalles del Vehículo</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-2">
+<label class="block font-label-md text-on-surface-variant mb-2">Marca y Modelo</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="Ej. Tesla Model 3 2024" type="text">
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Placas</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="ABC-123-D" type="text">
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Número de Serie (VIN)</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="17 caracteres..." type="text">
+</div>
+<div class="col-span-2 p-6 bg-surface-container-low rounded-xl border border-dashed border-outline-variant text-center">
+<span class="material-symbols-outlined text-[32px] text-brand-navy/30 mb-2">photo_camera</span>
+<p class="font-body-md text-on-surface-variant">Subir tarjeta de circulación para auto-completar</p>
+<button class="mt-3 px-4 py-2 text-sm font-semibold text-brand-navy bg-white border border-outline-variant rounded-lg hover:bg-surface transition-colors">Seleccionar Archivo</button>
+</div>
+</div>
+</div>
+<!-- STEP 3: POLICY DETAILS (Hidden by default) -->
+<div class="hidden step-transition" id="screen-3">
+<h3 class="font-headline-md text-headline-md text-brand-navy mb-8">Condiciones de Póliza</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Aseguradora</label>
+<select class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none">
+<option>Seleccione...</option>
+<option>AXA Seguros</option>
+<option>GNP Seguros</option>
+<option>Quálitas</option>
+<option>Chubb</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Monto de Prima (Anual)</label>
+<div class="relative">
+<span class="absolute left-3 top-3 text-on-surface-variant">$</span>
+<input class="w-full p-3 pl-8 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" placeholder="0.00" type="number">
+</div>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Fecha de Vencimiento</label>
+<input class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none" type="date">
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Tipo de Cobertura</label>
+<select class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-brand-navy outline-none">
+<option>Amplia</option>
+<option>Limitada</option>
+<option>RC Unicamente</option>
+</select>
+</div>
+</div>
+</div>
+<!-- STEP 4: AUTOMATION (Hidden by default) -->
+<div class="hidden step-transition" id="screen-4">
+<h3 class="font-headline-md text-headline-md text-brand-navy mb-2">Reglas de Automatización</h3>
+<p class="text-on-surface-variant mb-8 font-body-md">Configure cómo la IA de CAFI manejará este cliente.</p>
+<div class="space-y-4">
+<!-- Switch 1 -->
+<div class="p-4 bg-white border border-outline-variant rounded-xl flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-brand-navy">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<div>
+<h4 class="font-semibold text-brand-navy">Recordatorios WhatsApp</h4>
+<p class="text-xs text-on-surface-variant">Secuencia de 3 mensajes previos al vencimiento.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-12 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+<!-- Switch 2 -->
+<div class="p-4 bg-white border border-outline-variant rounded-xl flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-brand-navy">
+<span class="material-symbols-outlined">robot_2</span>
+</div>
+<div>
+<h4 class="font-semibold text-brand-navy">Llamada de IA ElevenLabs</h4>
+<p class="text-xs text-on-surface-variant">Llamada automática el día del vencimiento.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-12 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+<!-- Info Card AI -->
+<div class="p-4 bg-primary-fixed/30 border border-on-primary-container/20 rounded-xl flex gap-4">
+<span class="material-symbols-outlined text-brand-navy">auto_awesome</span>
+<div class="text-sm">
+<p class="font-bold text-brand-navy">Optimización Inteligente</p>
+<p class="text-on-surface-variant leading-relaxed">Nuestra IA detectará el mejor horario para contactar al cliente basándose en su actividad previa y la zona horaria registrada.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<footer class="mt-12 flex justify-between items-center">
+<button class="invisible px-6 py-3 font-semibold text-on-surface-variant hover:text-brand-navy flex items-center gap-2 transition-all" id="prev-btn">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Anterior
+                </button>
+<div class="flex gap-4">
+<button class="px-8 py-3 bg-brand-navy text-white rounded-lg font-bold hover:bg-primary transition-all flex items-center gap-2 shadow-sm active:scale-95" id="next-btn">
+                        Siguiente
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="hidden px-8 py-3 bg-brand-green text-brand-navy rounded-lg font-extrabold hover:opacity-90 transition-all shadow-md active:scale-95" id="submit-btn">
+                        Crear Renovación
+                    </button>
+</div>
+</footer>
+</section>
+</main>
+<!-- Success Modal Overlay (Hidden by default) -->
+<div class="fixed inset-0 z-50 bg-brand-navy/90 backdrop-blur-md flex items-center justify-center p-6 hidden opacity-0 transition-opacity duration-500" id="success-overlay">
+<div class="bg-white rounded-2xl p-12 max-w-md w-full text-center scale-90 transition-transform duration-500" id="success-card">
+<div class="w-24 h-24 bg-brand-green/20 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-green">
+<span class="material-symbols-outlined text-[64px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-brand-navy mb-2">¡Todo listo!</h2>
+<p class="text-on-surface-variant font-body-lg mb-8">La renovación ha sido dada de alta. El flujo de automatización comenzará en 24 horas.</p>
+<button class="w-full py-4 bg-brand-navy text-white rounded-xl font-bold hover:bg-primary transition-colors" onclick="location.reload()">Volver al Dashboard</button>
+</div>
+</div>
+<script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        const screens = [
+            document.getElementById('screen-1'),
+            document.getElementById('screen-2'),
+            document.getElementById('screen-3'),
+            document.getElementById('screen-4')
+        ];
+
+        const navItems = [
+            document.getElementById('step-nav-1'),
+            document.getElementById('step-nav-2'),
+            document.getElementById('step-nav-3'),
+            document.getElementById('step-nav-4')
+        ];
+
+        const icons = [
+            document.getElementById('icon-1'),
+            document.getElementById('icon-2'),
+            document.getElementById('icon-3'),
+            document.getElementById('icon-4')
+        ];
+
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const successOverlay = document.getElementById('success-overlay');
+        const successCard = document.getElementById('success-card');
+
+        function updateUI() {
+            // Update Screens
+            screens.forEach((screen, index) => {
+                if (index + 1 === currentStep) {
+                    screen.classList.remove('hidden');
+                    screen.classList.add('animate-in', 'fade-in', 'duration-500');
+                } else {
+                    screen.classList.add('hidden');
+                }
+            });
+
+            // Update Navigation Panel
+            navItems.forEach((item, index) => {
+                const stepIdx = index + 1;
+                if (stepIdx === currentStep) {
+                    item.classList.remove('opacity-50');
+                    item.classList.add('opacity-100');
+                    icons[index].classList.add('bg-brand-green', 'border-brand-green', 'text-brand-navy');
+                    icons[index].classList.remove('border-white/30');
+                    icons[index].querySelector('span').style.fontVariationSettings = "'FILL' 1";
+                } else if (stepIdx < currentStep) {
+                    item.classList.remove('opacity-50');
+                    item.classList.add('opacity-100');
+                    icons[index].classList.add('bg-white', 'border-white', 'text-brand-navy');
+                    icons[index].classList.remove('bg-brand-green', 'border-brand-green', 'border-white/30');
+                    icons[index].innerHTML = '<span class="material-symbols-outlined">done</span>';
+                } else {
+                    item.classList.add('opacity-50');
+                    item.classList.remove('opacity-100');
+                    icons[index].classList.remove('bg-brand-green', 'border-brand-green', 'bg-white', 'border-white', 'text-brand-navy');
+                    icons[index].classList.add('border-white/30');
+                    icons[index].querySelector('span').style.fontVariationSettings = "'FILL' 0";
+                }
+            });
+
+            // Buttons logic
+            if (currentStep === 1) {
+                prevBtn.classList.add('invisible');
+            } else {
+                prevBtn.classList.remove('invisible');
+            }
+
+            if (currentStep === totalSteps) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        });
+
+        submitBtn.addEventListener('click', () => {
+            successOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                successOverlay.classList.remove('opacity-0');
+                successCard.classList.remove('scale-90');
+                successCard.classList.add('scale-100');
+            }, 50);
+        });
+
+        // Initialize
+        updateUI();
+    </script>
+</body></html>

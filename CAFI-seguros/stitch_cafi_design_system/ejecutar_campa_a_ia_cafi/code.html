@@ -1,0 +1,580 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAFI Intelligence - Ejecutar Campaña IA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#006e2f",
+                        "secondary-fixed": "#6bff8f",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00006e",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-tertiary-fixed": "#410000",
+                        "on-primary-container": "#777eea",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container": "#e5eeff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#d96756",
+                        "brand-green": "#22C55E",
+                        "tertiary": "#220000",
+                        "brand-navy": "#000080",
+                        "secondary-fixed-dim": "#4ae176",
+                        "primary-container": "#000080",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed": "#002109",
+                        "inverse-primary": "#bfc2ff",
+                        "on-background": "#0b1c30",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#4b53bc",
+                        "inverse-surface": "#213145",
+                        "status-urgent": "#F97316",
+                        "status-critical": "#EF4444",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "secondary-container": "#6bff8f",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-low": "#eff4ff",
+                        "surface-bg": "#F8FAFC",
+                        "primary": "#00003c",
+                        "outline": "#767684",
+                        "status-warning": "#F59E0B",
+                        "on-tertiary-fixed-variant": "#82271c",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#bfc2ff",
+                        "outline-variant": "#c6c5d5",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#464653",
+                        "status-neutral": "#0F172A",
+                        "tertiary-container": "#4d0000",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed": "#e0e0ff",
+                        "on-surface": "#0b1c30",
+                        "on-secondary-fixed-variant": "#005321",
+                        "on-secondary-container": "#007432",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#3239a3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "mono-sm": ["Inter"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<!-- Sidebar (Shared Component Anchor) -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant flex flex-col p-4 shadow-sm z-50">
+<div class="mb-8 px-2">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">CAFI Intelligence</h1>
+<p class="text-[11px] uppercase tracking-widest text-on-surface-variant font-bold">Insurance CRM</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">WhatsApp Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">record_voice_over</span>
+<span class="font-label-md text-label-md">AI Calls</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Clients</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar (Shared Component Anchor) -->
+<header class="ml-[260px] flex justify-between items-center h-16 px-8 w-[calc(100%-260px)] bg-surface shadow-sm z-40 fixed top-0">
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-md w-64 focus:ring-2 focus:ring-primary-container transition-all" placeholder="Buscar cliente o póliza..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">chat_bubble</span>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface">Agente Seguros</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Admin</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-container" data-alt="Professional headshot of a smiling insurance executive in a clean, modern office setting with soft natural lighting and a minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX-WRsZSrKjZQBbTLPfr6K03-cp6YLx94dk-VMRQV5PI26ImWNcGnStuMyyFZtSL3WTXLbxUB8MSlhThQCMsLXg8vL-U5l4RMA_NxveW-UzCHh7d85uy_8CgHvmX6dkVY84f98HdA-mNU6vZ2FjYe9TIUGB_EwMnmzBaplDy69HPy7jWZ7Q9Po0DSakCZ6Kvcp6-37BOOa9EKuoyLxPAWYSTMsIwIUpvmorRcgO_DdTc1vkhbXM0t67dAsKcj00urdqNFzNOB3nQo">
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[260px] mt-16 p-8 h-[calc(100vh-64px)] overflow-y-auto bg-surface-bg relative">
+<!-- Abstract Background Detail -->
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none overflow-hidden">
+
+</div>
+<div class="max-w-5xl mx-auto space-y-8 relative z-10">
+<!-- Header & Stepper -->
+<div class="flex flex-col gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-brand-navy">Ejecutar Campaña IA</h2>
+<p class="text-on-surface-variant font-body-lg">Configura y lanza tu funnel de renovación automatizado en segundos.</p>
+</div>
+<!-- Wizard Progress -->
+<div class="flex items-center justify-between px-4">
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="goToStep(1)">
+<div class="w-10 h-10 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold transition-all shadow-lg shadow-brand-navy/20" id="step-1-dot">1</div>
+<span class="font-label-md text-label-md text-brand-navy">Audiencia</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant mx-4 mt-[-20px]"></div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="goToStep(2)">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold transition-all" id="step-2-dot">2</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Canales</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant mx-4 mt-[-20px]"></div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="goToStep(3)">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold transition-all" id="step-3-dot">3</div>
+<span class="font-label-md text-label-md text-on-surface-variant">IA Config</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant mx-4 mt-[-20px]"></div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="goToStep(4)">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold transition-all" id="step-4-dot">4</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Lanzamiento</span>
+</div>
+</div>
+</div>
+<!-- Step 1: Audience Selection -->
+<section class="step-content" id="step-1">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<h3 class="font-headline-sm text-headline-sm mb-4">Segmentación por Vencimiento</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<label class="relative flex flex-col p-4 border-2 border-status-critical bg-status-critical/5 rounded-xl cursor-pointer hover:shadow-md transition-all group">
+<input checked="" class="absolute top-4 right-4 text-status-critical focus:ring-status-critical rounded" type="checkbox">
+<span class="text-status-critical font-bold text-lg mb-1">Vencidas</span>
+<span class="text-sm text-on-surface-variant">Pólizas sin acción inmediata</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">124</span>
+<span class="text-xs text-on-surface-variant">Clientes</span>
+</div>
+</label>
+<label class="relative flex flex-col p-4 border-2 border-status-urgent bg-status-urgent/5 rounded-xl cursor-pointer hover:shadow-md transition-all">
+<input checked="" class="absolute top-4 right-4 text-status-urgent focus:ring-status-urgent rounded" type="checkbox">
+<span class="text-status-urgent font-bold text-lg mb-1">Hoy - 7 días</span>
+<span class="text-sm text-on-surface-variant">Urgencia alta de renovación</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">86</span>
+<span class="text-xs text-on-surface-variant">Clientes</span>
+</div>
+</label>
+<label class="relative flex flex-col p-4 border-2 border-status-warning bg-status-warning/5 rounded-xl cursor-pointer hover:shadow-md transition-all">
+<input class="absolute top-4 right-4 text-status-warning focus:ring-status-warning rounded" type="checkbox">
+<span class="text-status-warning font-bold text-lg mb-1">8 - 15 días</span>
+<span class="text-sm text-on-surface-variant">Recordatorio preventivo</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">242</span>
+<span class="text-xs text-on-surface-variant">Clientes</span>
+</div>
+</label>
+<label class="relative flex flex-col p-4 border-2 border-outline-variant bg-surface rounded-xl cursor-pointer hover:shadow-md transition-all">
+<input class="absolute top-4 right-4 text-on-surface-variant focus:ring-brand-navy rounded" type="checkbox">
+<span class="text-on-surface-variant font-bold text-lg mb-1">16 - 30 días</span>
+<span class="text-sm text-on-surface-variant">Planificación temprana</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">512</span>
+<span class="text-xs text-on-surface-variant">Clientes</span>
+</div>
+</label>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<h3 class="font-headline-sm text-headline-sm mb-4">Filtros Avanzados</h3>
+<div class="flex flex-wrap gap-3">
+<button class="px-4 py-2 bg-surface-container-high rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+                                    Ramo: Automóviles <span class="material-symbols-outlined text-sm">close</span>
+</button>
+<button class="px-4 py-2 bg-surface-container-high rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+                                    Prima &gt; $5,000 <span class="material-symbols-outlined text-sm">close</span>
+</button>
+<button class="px-4 py-2 border-2 border-dashed border-outline-variant rounded-full font-label-md text-label-md flex items-center gap-2 hover:border-brand-navy text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> Añadir Filtro
+                                </button>
+</div>
+</div>
+</div>
+<div class="bg-brand-navy text-white p-8 rounded-xl flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="font-label-md text-label-md opacity-70 uppercase tracking-widest mb-2">Resumen de Audiencia</p>
+<h4 class="text-5xl font-bold mb-4">210</h4>
+<p class="text-xl opacity-90 leading-tight">Clientes seleccionados para esta campaña.</p>
+<div class="mt-8 space-y-4">
+<div class="flex justify-between items-center text-sm border-b border-white/20 pb-2">
+<span>Vencidas</span>
+<span class="font-bold">124</span>
+</div>
+<div class="flex justify-between items-center text-sm border-b border-white/20 pb-2">
+<span>Urgentes</span>
+<span class="font-bold">86</span>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-10 -right-10 opacity-20">
+<span class="material-symbols-outlined text-[160px]">group</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2: Channel Selection -->
+<section class="step-content hidden" id="step-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- WhatsApp Channel -->
+<div class="group relative overflow-hidden bg-surface-container-lowest border-2 border-outline-variant rounded-2xl p-8 hover:border-brand-green transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-16 h-16 rounded-2xl bg-brand-green/10 flex items-center justify-center text-brand-green">
+<span class="material-symbols-outlined text-4xl">chat</span>
+</div>
+<input checked="" class="w-6 h-6 rounded text-brand-green focus:ring-brand-green" type="checkbox">
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">WhatsApp Business IA</h3>
+<p class="text-on-surface-variant mb-6">Envía mensajes interactivos con botones de pago y confirmación. Automatizado con la API oficial.</p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-center gap-2 text-sm text-on-surface"><span class="material-symbols-outlined text-brand-green">check_circle</span> Tasa de apertura: 98%</li>
+<li class="flex items-center gap-2 text-sm text-on-surface"><span class="material-symbols-outlined text-brand-green">check_circle</span> Flujo de respuesta automático</li>
+<li class="flex items-center gap-2 text-sm text-on-surface"><span class="material-symbols-outlined text-brand-green">check_circle</span> Envío de PDF de póliza</li>
+</ul>
+<div class="p-4 bg-brand-green/5 rounded-lg border border-brand-green/20">
+<p class="text-xs text-brand-green font-bold">RECOMENDADO</p>
+<p class="text-sm text-on-surface-variant">Ideal para el 80% de tus renovaciones.</p>
+</div>
+</div>
+<!-- AI Voice Call -->
+<div class="group relative overflow-hidden bg-surface-container-lowest border-2 border-outline-variant rounded-2xl p-8 hover:border-brand-navy transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-16 h-16 rounded-2xl bg-brand-navy/10 flex items-center justify-center text-brand-navy">
+<span class="material-symbols-outlined text-4xl">record_voice_over</span>
+</div>
+<input class="w-6 h-6 rounded text-brand-navy focus:ring-brand-navy" type="checkbox">
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Llamada de Voz IA</h3>
+<p class="text-on-surface-variant mb-6">Llamadas ultra-realistas impulsadas por ElevenLabs. Capaces de conversar y agendar citas.</p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-center gap-2 text-sm text-on-surface"><span class="material-symbols-outlined text-brand-navy">check_circle</span> Clonación de voz profesional</li>
+<li class="flex items-center gap-2 text-sm text-on-surface"><span class="material-symbols-outlined text-brand-navy">check_circle</span> Transcripción en tiempo real</li>
+<li class="flex items-center gap-2 text-sm text-on-surface"><span class="material-symbols-outlined text-brand-navy">check_circle</span> Detección de sentimientos</li>
+</ul>
+<div class="p-4 bg-brand-navy/5 rounded-lg border border-brand-navy/20">
+<p class="text-xs text-brand-navy font-bold">PREMIUM</p>
+<p class="text-sm text-on-surface-variant">Aumenta la conversión en pólizas de alto valor.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3: Template & Voice Config -->
+<section class="step-content hidden" id="step-3">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Template Selection -->
+<div class="lg:col-span-1 space-y-6">
+<h3 class="font-headline-sm text-headline-sm">Plantilla del Mensaje</h3>
+<div class="space-y-4">
+<div class="p-4 bg-primary-container text-white rounded-xl cursor-pointer border-2 border-brand-navy">
+<p class="font-bold mb-1">Renovación Amistosa</p>
+<p class="text-xs opacity-80 line-clamp-2">"Hola {{name}}, notamos que tu póliza {{policy}} está por vencer..."</p>
+</div>
+<div class="p-4 bg-white border border-outline-variant rounded-xl cursor-pointer hover:border-brand-navy transition-colors">
+<p class="font-bold mb-1 text-on-surface">Urgencia Máxima</p>
+<p class="text-xs text-on-surface-variant line-clamp-2">"¡Atención {{name}}! Tu cobertura ha vencido hoy. Evita multas..."</p>
+</div>
+<div class="p-4 bg-white border border-outline-variant rounded-xl cursor-pointer hover:border-brand-navy transition-colors">
+<p class="font-bold mb-1 text-on-surface">Beneficios &amp; Descuentos</p>
+<p class="text-xs text-on-surface-variant line-clamp-2">"Hola {{name}}, renovamos tu confianza con un 10% de descuento..."</p>
+</div>
+</div>
+</div>
+<!-- Voice Configuration -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl border border-outline-variant p-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="p-3 bg-brand-navy rounded-full">
+<span class="material-symbols-outlined text-white">graphic_eq</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm">Configuración de Voz IA</h3>
+<p class="text-sm text-on-surface-variant">Basado en tecnología ElevenLabs</p>
+</div>
+</div>
+<div class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-md text-label-md">Seleccionar Narrador</label>
+<select class="w-full rounded-lg border-outline-variant focus:ring-brand-navy">
+<option>Ricardo (Ejecutivo Serio)</option>
+<option>Elena (Asistente Cordial)</option>
+<option>Andrés (Voz Dinámica)</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md">Tono Emocional</label>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 bg-brand-navy text-white rounded-lg text-sm font-bold">Profesional</button>
+<button class="flex-1 py-2 px-3 border border-outline-variant rounded-lg text-sm hover:bg-surface-container-low">Entusiasta</button>
+<button class="flex-1 py-2 px-3 border border-outline-variant rounded-lg text-sm hover:bg-surface-container-low">Empático</button>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md">Prueba de Voz</label>
+<button class="text-brand-navy flex items-center gap-1 font-bold text-sm hover:underline">
+<span class="material-symbols-outlined text-sm">play_arrow</span> Generar Audio
+                                    </button>
+</div>
+<div class="h-20 bg-brand-navy/5 rounded-xl border border-dashed border-brand-navy/30 flex items-center justify-center">
+
+</div>
+</div>
+<div class="flex items-center gap-3 p-4 bg-blue-50 rounded-lg border border-blue-100">
+<span class="material-symbols-outlined text-blue-600">info</span>
+<p class="text-sm text-blue-800">La IA saludará automáticamente por nombre y mencionará la compañía aseguradora específica de cada cliente.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 4: Review & Launch -->
+<section class="step-content hidden" id="step-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+<div class="p-6 border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm">Resumen de Campaña</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between py-2 border-b border-outline-variant">
+<span class="text-on-surface-variant">Nombre</span>
+<span class="font-bold">Renovaciones Urgentes Marzo</span>
+</div>
+<div class="flex justify-between py-2 border-b border-outline-variant">
+<span class="text-on-surface-variant">Total Audiencia</span>
+<span class="font-bold">210 Clientes</span>
+</div>
+<div class="flex justify-between py-2 border-b border-outline-variant">
+<span class="text-on-surface-variant">Canales Activos</span>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-brand-green/10 text-brand-green text-[10px] font-bold rounded">WHATSAPP</span>
+<span class="px-2 py-1 bg-brand-navy/10 text-brand-navy text-[10px] font-bold rounded">AI VOICE</span>
+</div>
+</div>
+<div class="flex justify-between py-2 border-b border-outline-variant">
+<span class="text-on-surface-variant">Voz Seleccionada</span>
+<span class="font-bold">Ricardo (Profesional)</span>
+</div>
+<div class="flex justify-between py-2">
+<span class="text-on-surface-variant">Estimado de Ejecución</span>
+<span class="font-bold">~12 Minutos</span>
+</div>
+</div>
+</div>
+<div class="p-6 bg-secondary-container/30 border-2 border-secondary rounded-2xl flex gap-4 items-center">
+<div class="w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div>
+<p class="font-bold text-on-secondary-container">Listo para el despegue</p>
+<p class="text-sm text-on-secondary-container/80">Al hacer clic en "Lanzar Campaña", el sistema comenzará a procesar los envíos secuencialmente.</p>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="bg-white p-6 rounded-2xl shadow-xl border border-outline-variant">
+<h4 class="font-bold mb-4 text-center">Vista Previa WhatsApp</h4>
+<div class="bg-[#e5ddd5] p-3 rounded-lg space-y-3">
+<div class="bg-white p-3 rounded-lg shadow-sm max-w-[85%]">
+<p class="text-[13px]">Hola <strong>Juan</strong>, soy Ricardo de tu agencia de seguros. 🚀</p>
+<p class="text-[13px] mt-1">Te escribo porque tu póliza con <strong>AXA</strong> vence en 3 días.</p>
+<p class="text-[13px] mt-1">¿Te gustaría renovarla ahora con el mismo precio del año pasado?</p>
+<div class="mt-3 flex flex-col gap-2">
+<div class="bg-white border border-blue-100 text-blue-600 text-center py-2 text-xs font-bold rounded-md">✅ Sí, renovar ahora</div>
+<div class="bg-white border border-blue-100 text-blue-600 text-center py-2 text-xs font-bold rounded-md">📞 Prefiero una llamada</div>
+</div>
+</div>
+<p class="text-[10px] text-gray-500 text-center">14:32</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Navigation Actions -->
+<div class="flex justify-between items-center pt-8 border-t border-outline-variant">
+<button class="px-8 py-3 border border-outline-variant text-on-surface font-bold rounded-xl hover:bg-surface-container-high transition-all flex items-center gap-2 invisible" id="prev-btn" onclick="prevStep()">
+<span class="material-symbols-outlined">arrow_back</span> Anterior
+                </button>
+<div class="flex gap-4">
+<button class="px-8 py-3 text-on-surface-variant font-bold hover:text-primary transition-all">Guardar Borrador</button>
+<button class="px-10 py-3 bg-brand-navy text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 active:scale-100 transition-all flex items-center gap-2" id="next-btn" onclick="nextStep()">
+                        Siguiente <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-10 py-3 bg-secondary text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 active:scale-100 transition-all flex items-center gap-2 hidden" id="launch-btn" onclick="launchCampaign()">
+                        Lanzar Campaña <span class="material-symbols-outlined">check</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center p-4" id="success-modal">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+<div class="bg-white rounded-3xl p-12 max-w-lg w-full relative z-10 text-center space-y-6 shadow-2xl transform transition-all">
+<div class="w-24 h-24 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-6xl">verified</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">¡Campaña en Marcha!</h2>
+<p class="text-on-surface-variant text-lg">Tu campaña ha sido programada y comenzará a enviarse en breve. Puedes monitorear el progreso en tiempo real desde el dashboard.</p>
+<div class="pt-4 flex gap-4">
+<button class="flex-1 py-4 bg-brand-navy text-white font-bold rounded-xl" onclick="window.location.reload()">Ir al Dashboard</button>
+<button class="flex-1 py-4 border border-outline-variant text-on-surface font-bold rounded-xl" onclick="window.location.reload()">Ver Reporte</button>
+</div>
+</div>
+</div>
+<script>
+        let currentStep = 1;
+
+        function updateUI() {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(step => step.classList.add('hidden'));
+            // Show current step
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+
+            // Update Progress Dots
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`step-${i}-dot`);
+                const label = dot.nextElementSibling;
+                if (i < currentStep) {
+                    dot.className = "w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold transition-all";
+                    dot.innerHTML = `<span class="material-symbols-outlined">check</span>`;
+                    label.classList.add('text-secondary');
+                } else if (i === currentStep) {
+                    dot.className = "w-10 h-10 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold transition-all shadow-lg shadow-brand-navy/20";
+                    dot.innerHTML = i;
+                    label.classList.add('text-brand-navy');
+                    label.classList.remove('text-on-surface-variant');
+                } else {
+                    dot.className = "w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold transition-all";
+                    dot.innerHTML = i;
+                    label.classList.remove('text-brand-navy', 'text-secondary');
+                    label.classList.add('text-on-surface-variant');
+                }
+            }
+
+            // Button visibility
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const launchBtn = document.getElementById('launch-btn');
+
+            if (currentStep === 1) {
+                prevBtn.classList.add('invisible');
+            } else {
+                prevBtn.classList.remove('invisible');
+            }
+
+            if (currentStep === 4) {
+                nextBtn.classList.add('hidden');
+                launchBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                launchBtn.classList.add('hidden');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 4) {
+                currentStep++;
+                updateUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function goToStep(step) {
+            currentStep = step;
+            updateUI();
+        }
+
+        function launchCampaign() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Interaction: Confetti-like effect or just simple scale
+            modal.querySelector('div.bg-white').classList.add('scale-100', 'opacity-100');
+            modal.querySelector('div.bg-white').classList.remove('scale-90', 'opacity-0');
+        }
+
+        // Initialize UI
+        updateUI();
+    </script>
+</body></html>

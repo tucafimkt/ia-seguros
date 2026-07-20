@@ -1,0 +1,526 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAFI Insurance - Llamadas IA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #E2E8F0;
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(119, 126, 234, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#d96756",
+                      "status-critical": "#EF4444",
+                      "status-urgent": "#F97316",
+                      "background": "#f8f9ff",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb4a8",
+                      "tertiary-fixed": "#ffdad4",
+                      "primary": "#00003c",
+                      "brand-navy": "#000080",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed": "#6bff8f",
+                      "on-secondary-container": "#007432",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#0b1c30",
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-high": "#dce9ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "inverse-surface": "#213145",
+                      "outline": "#767684",
+                      "secondary-fixed-dim": "#4ae176",
+                      "surface-variant": "#d3e4fe",
+                      "on-primary-container": "#777eea",
+                      "inverse-primary": "#bfc2ff",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#e0e0ff",
+                      "status-neutral": "#0F172A",
+                      "surface-container-highest": "#d3e4fe",
+                      "tertiary-container": "#4d0000",
+                      "on-error": "#ffffff",
+                      "brand-green": "#22C55E",
+                      "on-surface-variant": "#464653",
+                      "outline-variant": "#c6c5d5",
+                      "surface": "#f8f9ff",
+                      "surface-tint": "#4b53bc",
+                      "error": "#ba1a1a",
+                      "tertiary": "#220000",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#eff4ff",
+                      "surface-container": "#e5eeff",
+                      "primary-container": "#000080",
+                      "primary-fixed-dim": "#bfc2ff",
+                      "surface-dim": "#cbdbf5",
+                      "on-tertiary-fixed-variant": "#82271c",
+                      "status-warning": "#F59E0B",
+                      "surface-bg": "#F8FAFC",
+                      "secondary": "#006e2f",
+                      "on-tertiary-fixed": "#410000",
+                      "secondary-container": "#6bff8f",
+                      "on-primary-fixed": "#00006e",
+                      "on-background": "#0b1c30",
+                      "on-secondary-fixed-variant": "#005321",
+                      "on-secondary-fixed": "#002109",
+                      "on-primary-fixed-variant": "#3239a3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding": "24px",
+                      "card-gap": "16px",
+                      "base": "4px",
+                      "section-margin": "32px",
+                      "gutter-grid": "20px"
+              },
+              "fontFamily": {
+                      "headline-sm": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "mono-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "mono-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface-bg font-body-md text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-white border-r border-outline-variant flex flex-col py-6 space-y-4 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm font-bold text-brand-navy">CAFI Insurance</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Intelligence Platform</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-body-md">Campañas WhatsApp</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-primary font-bold border-r-4 border-primary bg-surface-container-low transition-colors duration-200 ease-in-out rounded-l-lg group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">robot_2</span>
+<span class="font-body-md">Llamadas IA</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md">Calendario</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-body-md">Integraciones</span>
+</a>
+</nav>
+<div class="px-3 pt-4 border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Configuración</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Ayuda</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-white/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-8 z-40">
+<div class="flex items-center gap-6">
+<h2 class="font-headline-md text-headline-md font-extrabold text-brand-navy">Llamadas IA</h2>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-md focus:ring-2 focus:ring-primary-container/20" placeholder="Buscar grabaciones o clientes..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-300 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined">history</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="text-body-md font-bold text-on-surface group-hover:text-brand-navy transition-colors">Agente Premium</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Plan Enterprise</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional corporate headshot of a middle-aged insurance executive with a confident smile, wearing a sharp navy blue suit and a crisp white shirt, set against a clean, softly blurred modern office background with neutral gray and blue tones, reflecting high-trust financial services aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFizdWU6FbguMXQIqflLBqHMYI_uf-KiGtq6jgusPdvmCimngL1Q1izou5gf5fvHGySE1ivmIsI87WP6tekxke6MWmqi8fXTpWFLyLEU6l21oWdXEFopXzM1jiyRRZ7onrCo1yaRyS7egi5MSDj6urGVRpohJ6YoEllJG8I3TA_KPA6nCr6IjyneKqKam6L_KlwTOibk7ENSAEEFHzn_W0-U0-qD7zjB339uh-_7NacngC_B9nE19hu4Re5B-qetluQ6kwn0PLg5U">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[260px] pt-16 p-8 min-h-screen">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Panel de Control Voice IA</h3>
+<p class="text-on-surface-variant mt-1">Gestión de renovaciones automatizadas vía ElevenLabs.</p>
+</div>
+<button class="flex items-center gap-2 bg-brand-navy text-white px-6 py-3 rounded-xl font-bold hover:bg-primary transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined">add_call</span>
+                Nueva Campaña de Llamadas
+            </button>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-low rounded-lg text-brand-navy">
+<span class="material-symbols-outlined">call_made</span>
+</div>
+<span class="text-brand-green font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +12%
+                    </span>
+</div>
+<p class="text-on-surface-variant text-label-md font-bold uppercase tracking-wider">Llamadas Totales</p>
+<h4 class="font-headline-lg text-display-lg text-brand-navy mt-1">1,284</h4>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container/20 rounded-lg text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="text-brand-green font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> 94%
+                    </span>
+</div>
+<p class="text-on-surface-variant text-label-md font-bold uppercase tracking-wider">Contestadas</p>
+<h4 class="font-headline-lg text-display-lg text-on-surface mt-1">1,206</h4>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-high rounded-lg text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<span class="text-status-warning font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">remove</span> -2s
+                    </span>
+</div>
+<p class="text-on-surface-variant text-label-md font-bold uppercase tracking-wider">Duración Promedio</p>
+<h4 class="font-headline-lg text-display-lg text-on-surface mt-1">1:42<span class="text-headline-sm font-normal text-outline">m</span></h4>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-brand-green">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container/20 rounded-lg text-secondary">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<span class="text-brand-green font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +5%
+                    </span>
+</div>
+<p class="text-on-surface-variant text-label-md font-bold uppercase tracking-wider">Renovaciones IA</p>
+<h4 class="font-headline-lg text-display-lg text-brand-navy mt-1">842</h4>
+</div>
+</div>
+<!-- Main Bento Section -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Recent Recordings Table -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<div class="bg-white rounded-xl border border-outline-variant overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h5 class="font-headline-sm text-on-surface">Grabaciones Recientes</h5>
+<button class="text-primary font-bold text-body-md hover:underline">Ver todas</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 text-on-surface-variant">
+<th class="px-6 py-3 font-label-md uppercase tracking-wider border-b border-outline-variant">Cliente</th>
+<th class="px-6 py-3 font-label-md uppercase tracking-wider border-b border-outline-variant">Estado</th>
+<th class="px-6 py-3 font-label-md uppercase tracking-wider border-b border-outline-variant">Duración</th>
+<th class="px-6 py-3 font-label-md uppercase tracking-wider border-b border-outline-variant text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4 border-l-4 border-brand-green">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary font-bold text-xs">RM</div>
+<div>
+<p class="font-bold text-on-surface">Roberto Martínez</p>
+<p class="text-xs text-on-surface-variant">Póliza: AUTO-2834</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container/30 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse"></span> Finalizada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">2:15m</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-primary hover:bg-surface-container rounded-lg transition-colors" title="Escuchar">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+<button class="px-3 py-1.5 text-xs font-bold border border-outline-variant rounded-lg hover:bg-surface-container transition-colors" onclick="toggleTranscription()">Transcripción</button>
+<button class="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded-lg hover:opacity-90 transition-colors">Resumen IA</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4 border-l-4 border-status-warning">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary font-bold text-xs">EC</div>
+<div>
+<p class="font-bold text-on-surface">Elena Castillo</p>
+<p class="text-xs text-on-surface-variant">Póliza: VIDA-9921</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-surface-container-high text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Buzón
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">0:45m</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-primary hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+<button class="px-3 py-1.5 text-xs font-bold border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">Transcripción</button>
+<button class="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded-lg hover:opacity-90 transition-colors">Resumen IA</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4 border-l-4 border-brand-green">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary font-bold text-xs">JL</div>
+<div>
+<p class="font-bold text-on-surface">Juan López</p>
+<p class="text-xs text-on-surface-variant">Póliza: HOGAR-1102</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container/30 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> Finalizada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">3:40m</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-primary hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+<button class="px-3 py-1.5 text-xs font-bold border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">Transcripción</button>
+<button class="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded-lg hover:opacity-90 transition-colors">Resumen IA</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- AI Transcription Modal-like Preview (Static for Demo) -->
+<div class="bg-[#F0F9FF] border border-outline-variant rounded-xl p-6 ai-glow" id="transcription-pane">
+<div class="flex items-center gap-3 mb-4">
+<div class="bg-brand-navy p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<h6 class="font-bold text-brand-navy">Análisis de Inteligencia Artificial (ElevenLabs)</h6>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="w-10 text-[10px] font-mono-sm text-outline-variant mt-1 shrink-0">00:05</div>
+<div class="flex-1 bg-white p-3 rounded-lg text-sm border border-outline-variant/30">
+<span class="font-bold text-brand-navy block mb-1 uppercase text-[10px]">IA (Voz: Bella)</span>
+                                "Hola Roberto, le habla la asistente inteligente de CAFI Insurance. Le llamamos porque su póliza de auto está a 15 días de vencer."
+                            </div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 text-[10px] font-mono-sm text-outline-variant mt-1 shrink-0">00:12</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-lg text-sm">
+<span class="font-bold text-on-surface block mb-1 uppercase text-[10px]">Cliente (Roberto)</span>
+                                "Ah, sí, lo tenía en mente. ¿Se mantiene el mismo costo o hay algún cambio este año?"
+                            </div>
+</div>
+<div class="mt-6 pt-4 border-t border-blue-200">
+<p class="text-xs font-bold text-blue-700 uppercase tracking-widest mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Resumen Ejecutivo IA
+                            </p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                El cliente muestra interés proactivo en la renovación. Su principal preocupación es el ajuste de prima. La IA procedió a confirmar los datos actuales y agendó una llamada de cierre con un asesor humano para mañana a las 10:00 AM para discutir descuentos por lealtad. <span class="font-bold text-brand-green">Sentimiento: Positivo / Alta Probabilidad.</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Configuration Section -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Voice Selector -->
+<div class="bg-white rounded-xl border border-outline-variant p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">record_voice_over</span>
+<h5 class="font-bold text-on-surface">Configuración de Voz</h5>
+</div>
+<div class="space-y-4">
+<div class="relative group">
+<label class="text-xs font-bold text-on-surface-variant uppercase mb-2 block">Voz de ElevenLabs</label>
+<select class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary appearance-none bg-surface-container-low py-3 px-4 text-sm font-medium">
+<option>Bella (Professional &amp; Warm)</option>
+<option>Antoni (Executive &amp; Trustworthy)</option>
+<option>Josh (Energetic &amp; Direct)</option>
+<option>Rachel (Empathetic &amp; Soft)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-[38px] text-outline pointer-events-none">expand_more</span>
+</div>
+<div class="pt-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant uppercase mb-2">
+<span>Estabilidad</span>
+<span class="text-primary">75%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-brand-navy" type="range">
+</div>
+<div class="pt-2">
+<div class="flex justify-between text-xs font-bold text-on-surface-variant uppercase mb-2">
+<span>Claridad + Semejanza</span>
+<span class="text-primary">82%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-full appearance-none cursor-pointer accent-brand-navy" type="range">
+</div>
+<button class="w-full flex items-center justify-center gap-2 border-2 border-primary-container text-primary py-2.5 rounded-xl font-bold hover:bg-surface-container-low transition-colors mt-4">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                            Probar Voz de Muestra
+                        </button>
+</div>
+</div>
+<!-- Script Editor -->
+<div class="bg-white rounded-xl border border-outline-variant p-6 shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">description</span>
+<h5 class="font-bold text-on-surface">Script de Renovación</h5>
+</div>
+<span class="text-[10px] font-bold text-brand-green px-2 py-0.5 bg-secondary-container/20 rounded">AUTO-SAVE</span>
+</div>
+<div class="space-y-4">
+<div>
+<label class="text-xs font-bold text-on-surface-variant uppercase mb-2 block">Contexto del Sistema</label>
+<textarea class="w-full rounded-xl border-outline-variant focus:border-primary focus:ring-primary bg-surface-container-low text-sm p-4 resize-none" placeholder="Eres una asistente de seguros llamada Sofia. Tu tono es profesional y servicial..." rows="4">Eres una asistente virtual de CAFI Insurance altamente capacitada. Tu objetivo es contactar a clientes cuyas pólizas están próximas a vencer, validar su satisfacción actual y facilitar el proceso de renovación inmediata.</textarea>
+</div>
+<div class="p-4 bg-primary-container/5 rounded-xl border border-primary-container/20 border-dashed">
+<p class="text-[10px] font-bold text-primary uppercase mb-2">Variables Disponibles</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[10px] font-mono-sm text-on-surface-variant cursor-pointer hover:border-primary transition-colors">{nombre_cliente}</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[10px] font-mono-sm text-on-surface-variant cursor-pointer hover:border-primary transition-colors">{tipo_poliza}</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[10px] font-mono-sm text-on-surface-variant cursor-pointer hover:border-primary transition-colors">{fecha_vencimiento}</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="text-xs text-on-surface-variant">Última edición: hace 2 horas</span>
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-bold text-sm hover:opacity-90">Guardar Cambios</button>
+</div>
+</div>
+</div>
+<!-- Status Card -->
+<div class="bg-brand-navy text-white rounded-xl p-6 shadow-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[120px]">bolt</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-6">
+<p class="text-label-md font-bold uppercase tracking-widest opacity-80">Estado de Automatización</p>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold">ACTIVO</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="opacity-80">Créditos ElevenLabs</span>
+<span class="font-mono-sm">8,420 / 10k</span>
+</div>
+<div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-green h-full" style="width: 84%"></div>
+</div>
+</div>
+<button class="w-full mt-6 bg-white text-brand-navy py-2 rounded-lg font-bold text-sm hover:bg-surface-container-lowest transition-colors">
+                            Recargar Créditos
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action for Quick Test -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 bg-brand-green text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all group overflow-hidden">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">phone_callback</span>
+</button>
+</div>
+<script>
+        // Micro-interactions for the UI
+        function toggleTranscription() {
+            const pane = document.getElementById('transcription-pane');
+            pane.style.transition = 'all 0.3s ease';
+            pane.classList.toggle('opacity-50');
+            // Subtle pulse animation logic could go here
+        }
+
+        // Simulating some loading states
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const originalContent = btn.innerHTML;
+                if(btn.innerText.includes('IA')) {
+                    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span>';
+                    setTimeout(() => {
+                        btn.innerHTML = originalContent;
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body></html>

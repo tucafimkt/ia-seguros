@@ -1,0 +1,461 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Centro de Integraciones - CAFI Insurance</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#d96756",
+                    "status-critical": "#EF4444",
+                    "status-urgent": "#F97316",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "tertiary-fixed": "#ffdad4",
+                    "primary": "#00003c",
+                    "brand-navy": "#000080",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#6bff8f",
+                    "on-secondary-container": "#007432",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#0b1c30",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "inverse-surface": "#213145",
+                    "outline": "#767684",
+                    "secondary-fixed-dim": "#4ae176",
+                    "surface-variant": "#d3e4fe",
+                    "on-primary-container": "#777eea",
+                    "inverse-primary": "#bfc2ff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#e0e0ff",
+                    "status-neutral": "#0F172A",
+                    "surface-container-highest": "#d3e4fe",
+                    "tertiary-container": "#4d0000",
+                    "on-error": "#ffffff",
+                    "brand-green": "#22C55E",
+                    "on-surface-variant": "#464653",
+                    "outline-variant": "#c6c5d5",
+                    "surface": "#f8f9ff",
+                    "surface-tint": "#4b53bc",
+                    "error": "#ba1a1a",
+                    "tertiary": "#220000",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container": "#e5eeff",
+                    "primary-container": "#000080",
+                    "primary-fixed-dim": "#bfc2ff",
+                    "surface-dim": "#cbdbf5",
+                    "on-tertiary-fixed-variant": "#82271c",
+                    "status-warning": "#F59E0B",
+                    "surface-bg": "#F8FAFC",
+                    "secondary": "#006e2f",
+                    "on-tertiary-fixed": "#410000",
+                    "secondary-container": "#6bff8f",
+                    "on-primary-fixed": "#00006e",
+                    "on-background": "#0b1c30",
+                    "on-secondary-fixed-variant": "#005321",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed-variant": "#3239a3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "card-gap": "16px",
+                    "base": "4px",
+                    "section-margin": "32px",
+                    "gutter-grid": "20px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "mono-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "mono-sm": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .integration-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface-bg font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-white border-r border-outline-variant flex flex-col py-6 space-y-4 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm font-bold text-brand-navy">CAFI Insurance</h1>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Intelligence Platform</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px]">chat</span>
+<span class="font-body-md">Campañas WhatsApp</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px]">robot_2</span>
+<span class="font-body-md">Llamadas IA</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="font-body-md">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<span class="font-body-md">Calendario</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out text-primary font-bold border-r-4 border-primary bg-surface-container-low rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px]">extension</span>
+<span class="font-body-md">Integraciones</span>
+</a>
+</nav>
+<div class="px-6 py-4">
+<button class="w-full bg-brand-navy text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+                Nueva Renovación
+            </button>
+</div>
+<div class="mt-auto px-3 border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="font-body-md">Configuración</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">help</span>
+<span class="font-body-md">Ayuda</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-[260px] min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] z-40 bg-white/80 backdrop-blur-md border-b border-outline-variant h-16 px-8 flex justify-between items-center shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 text-body-md" placeholder="Buscar aplicaciones o integraciones..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-status-critical rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="font-bold text-on-surface leading-none">Admin CAFI</p>
+<p class="text-[12px] text-on-surface-variant">Premium Account</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary/10 object-cover" data-alt="Professional studio portrait of a corporate administrator, warm lighting, high-end photography, clean minimalist background, blue and white color palette consistent with CAFI branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-wE4N86tI8cqBnz-asyg81YpY3LuzXiu5XxMo0UvQbZgtmmLQVB7W1CZ2XvBE-8U9dsokZVhbyCeMI_hu3NGe2Ido3GAFu4sq-e4ptklnxpEcQB9oOSYt9L2cRF2TZXmwVN2lFKZkyEr0LgtY0ipH8wmsCoZ18nCkBII-gJ6BhiUoYnTOSZ9_QNgv6NHomf-6FMBwvgI33kvZRTSLES6v6MPe3pzYGQ8iI3hhTelj4SH9Yu4B6V6SUkLTm6YyV-rdRtlabu-bT6k">
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="mt-16 p-8 max-w-[1600px] mx-auto w-full">
+<!-- Header Section -->
+<section class="mb-12">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-brand-navy mb-2">Centro de Integraciones</h2>
+<p class="text-on-surface-variant max-w-2xl font-body-lg text-body-lg">
+                            Conecta tus herramientas favoritas para automatizar el ciclo de vida de tus pólizas. 
+                            Desde comunicaciones por WhatsApp hasta análisis de voz con Inteligencia Artificial.
+                        </p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 rounded-xl border border-outline-variant font-bold text-brand-navy hover:bg-surface-container transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">refresh</span>
+                            Sincronizar Todo
+                        </button>
+</div>
+</div>
+</section>
+<!-- Categories Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+<!-- WhatsApp Cloud API -->
+<div class="integration-card bg-white border border-outline-variant p-6 rounded-2xl flex flex-col h-full transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-[#25D366]/10 flex items-center justify-center">
+<img alt="WhatsApp" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3pHGhmZnd6czMGHbyVJDlDnO0ebLEBOcvIf1mkAm24PLulhgIRae2rTxApV8xNOYq8Z6wjvWWj2WvdVn5naBXy0cxGqDRLghQwv3QsDULQE6O7SUITMCMqXVR9RyY_8S-UM_OPn83FubLgrSaaTFijD3T9KHTtkHJblSTR5gmk240VW756XwfXWNLHBEtPAZYrhX_s3YbIiAkYfFmPRLaMCvNM-lAZR-r9Y51T3-V0K7PnAkw63xD05iLaWK_q16YQmj2mbMcrA8">
+</div>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[12px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-brand-green rounded-full animate-pulse"></span>
+                            CONECTADO
+                        </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">WhatsApp Cloud API</h3>
+<p class="text-on-surface-variant text-body-md mb-6 flex-1">
+                        Envío automatizado de avisos de vencimiento, renovaciones y atención al cliente vía WhatsApp oficial.
+                    </p>
+<div class="flex gap-3 pt-4 border-t border-outline-variant/50">
+<button class="flex-1 py-2.5 rounded-lg bg-brand-navy text-white font-bold text-body-md hover:opacity-90 transition-all">Configurar</button>
+<button class="p-2.5 rounded-lg border border-outline-variant text-on-surface-variant hover:text-status-critical hover:border-status-critical transition-all">
+<span class="material-symbols-outlined">power_settings_new</span>
+</button>
+</div>
+</div>
+<!-- ElevenLabs -->
+<div class="integration-card bg-white border border-outline-variant p-6 rounded-2xl flex flex-col h-full transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-brand-navy">record_voice_over</span>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-[12px] font-bold">
+                            DESCONECTADO
+                        </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">ElevenLabs Voice AI</h3>
+<p class="text-on-surface-variant text-body-md mb-6 flex-1">
+                        Generación de llamadas salientes con voces humanas ultra-realistas para seguimiento de cobranza.
+                    </p>
+<div class="flex gap-3 pt-4 border-t border-outline-variant/50">
+<button class="flex-1 py-2.5 rounded-lg bg-brand-navy text-white font-bold text-body-md hover:opacity-90 transition-all">Conectar</button>
+<button class="p-2.5 rounded-lg border border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</div>
+<!-- n8n Automation -->
+<div class="integration-card bg-white border border-outline-variant p-6 rounded-2xl flex flex-col h-full transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-[#FF6D5B]/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-[#FF6D5B]">account_tree</span>
+</div>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[12px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-brand-green rounded-full animate-pulse"></span>
+                            CONECTADO
+                        </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">n8n Workflow Tool</h3>
+<p class="text-on-surface-variant text-body-md mb-6 flex-1">
+                        Crea flujos de trabajo complejos entre CAFI y más de 400 aplicaciones de terceros.
+                    </p>
+<div class="flex gap-3 pt-4 border-t border-outline-variant/50">
+<button class="flex-1 py-2.5 rounded-lg bg-brand-navy text-white font-bold text-body-md hover:opacity-90 transition-all">Configurar</button>
+<button class="p-2.5 rounded-lg border border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Google Sheets -->
+<div class="integration-card bg-white border border-outline-variant p-6 rounded-2xl flex flex-col h-full transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-[#0F9D58]/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-[#0F9D58]">table_chart</span>
+</div>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[12px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-brand-green rounded-full"></span>
+                            CONECTADO
+                        </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Google Sheets</h3>
+<p class="text-on-surface-variant text-body-md mb-6 flex-1">
+                        Sincronización bidireccional de prospectos y pólizas renovadas para reportes personalizados.
+                    </p>
+<div class="flex gap-3 pt-4 border-t border-outline-variant/50">
+<button class="flex-1 py-2.5 rounded-lg bg-brand-navy text-white font-bold text-body-md hover:opacity-90 transition-all">Configurar</button>
+<button class="p-2.5 rounded-lg border border-outline-variant text-on-surface-variant hover:text-status-critical hover:border-status-critical transition-all">
+<span class="material-symbols-outlined">link_off</span>
+</button>
+</div>
+</div>
+<!-- Kommo CRM -->
+<div class="integration-card bg-white border border-outline-variant p-6 rounded-2xl flex flex-col h-full transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-[#4056F1]/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-[#4056F1]">dynamic_form</span>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-[12px] font-bold">
+                            DESCONECTADO
+                        </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Kommo CRM</h3>
+<p class="text-on-surface-variant text-body-md mb-6 flex-1">
+                        Integra tus embudos de ventas conversacionales y gestiona leads desde una sola interfaz.
+                    </p>
+<div class="flex gap-3 pt-4 border-t border-outline-variant/50">
+<button class="flex-1 py-2.5 rounded-lg bg-brand-navy text-white font-bold text-body-md hover:opacity-90 transition-all">Conectar</button>
+<button class="p-2.5 rounded-lg border border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</div>
+<!-- API Docs Custom -->
+<div class="integration-card bg-gradient-to-br from-brand-navy to-[#00003c] p-6 rounded-2xl flex flex-col h-full text-white transition-all duration-300 group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-white">code</span>
+</div>
+<span class="px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-[12px] font-bold">
+                            CUSTOM
+                        </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Webhooks &amp; API</h3>
+<p class="text-white/70 text-body-md mb-6 flex-1">
+                        Desarrolla tus propias integraciones utilizando nuestra API REST y sistema de eventos en tiempo real.
+                    </p>
+<div class="flex gap-3 pt-4 border-t border-white/20">
+<button class="flex-1 py-2.5 rounded-lg bg-white text-brand-navy font-bold text-body-md hover:bg-surface-container-low transition-all">Documentación</button>
+</div>
+</div>
+</div>
+<!-- AI Intelligence Status Section -->
+<section class="mb-12">
+<div class="glass-panel border border-outline-variant rounded-3xl p-8 overflow-hidden relative">
+<div class="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-8">
+<div class="lg:col-span-1">
+<h4 class="font-headline-md text-headline-md text-brand-navy mb-2">Estado de Automatización</h4>
+<p class="text-on-surface-variant text-body-md">Monitoreo en tiempo real de tus reglas de IA activas.</p>
+<div class="mt-6 flex items-center gap-4">
+<div class="w-12 h-12 bg-brand-green/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-green" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<p class="text-[20px] font-bold text-on-surface">94%</p>
+<p class="text-[12px] text-on-surface-variant uppercase font-bold tracking-tighter">Eficiencia IA</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- AI Log Item 1 -->
+<div class="bg-white/50 border border-outline-variant/30 p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Llamada Finalizada</p>
+<p class="text-on-surface-variant text-[12px]">Póliza #8271 - ElevenLabs</p>
+</div>
+</div>
+<span class="text-on-surface-variant font-mono-sm text-mono-sm">Hace 2m</span>
+</div>
+<!-- AI Log Item 2 -->
+<div class="bg-white/50 border border-outline-variant/30 p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-green-50 text-green-600 rounded-lg">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">WhatsApp Enviado</p>
+<p class="text-on-surface-variant text-[12px]">Recordatorio - Cloud API</p>
+</div>
+</div>
+<span class="text-on-surface-variant font-mono-sm text-mono-sm">Hace 5m</span>
+</div>
+<!-- AI Log Item 3 -->
+<div class="bg-white/50 border border-outline-variant/30 p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Sync n8n Exitosa</p>
+<p class="text-on-surface-variant text-[12px]">CAFI -&gt; Google Sheets</p>
+</div>
+</div>
+<span class="text-on-surface-variant font-mono-sm text-mono-sm">Hace 12m</span>
+</div>
+<!-- AI Log Item 4 -->
+<div class="bg-white/50 border border-outline-variant/30 p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-orange-50 text-orange-600 rounded-lg">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Re-conexión requerida</p>
+<p class="text-on-surface-variant text-[12px]">Kommo CRM API Key</p>
+</div>
+</div>
+<span class="text-status-urgent font-mono-sm text-mono-sm font-bold">Urgente</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB for New Integration (Contextual only here) -->
+<button class="fixed bottom-8 right-8 bg-brand-navy text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform duration-300">add</span>
+</button>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.integration-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for more complex animations if needed
+            });
+        });
+
+        // Search highlight mock logic
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.integration-card').forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(query)) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.opacity = '0.4';
+                    card.style.transform = 'scale(0.95)';
+                }
+            });
+        });
+    </script>
+</body></html>

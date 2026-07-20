@@ -1,0 +1,506 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Configuración del Sistema | CAFI Insurance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#d96756",
+                    "status-critical": "#EF4444",
+                    "status-urgent": "#F97316",
+                    "background": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "tertiary-fixed": "#ffdad4",
+                    "primary": "#00003c",
+                    "brand-navy": "#000080",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#6bff8f",
+                    "on-secondary-container": "#007432",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#0b1c30",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "inverse-surface": "#213145",
+                    "outline": "#767684",
+                    "secondary-fixed-dim": "#4ae176",
+                    "surface-variant": "#d3e4fe",
+                    "on-primary-container": "#777eea",
+                    "inverse-primary": "#bfc2ff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#e0e0ff",
+                    "status-neutral": "#0F172A",
+                    "surface-container-highest": "#d3e4fe",
+                    "tertiary-container": "#4d0000",
+                    "on-error": "#ffffff",
+                    "brand-green": "#22C55E",
+                    "on-surface-variant": "#464653",
+                    "outline-variant": "#c6c5d5",
+                    "surface": "#f8f9ff",
+                    "surface-tint": "#4b53bc",
+                    "error": "#ba1a1a",
+                    "tertiary": "#220000",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container": "#e5eeff",
+                    "primary-container": "#000080",
+                    "primary-fixed-dim": "#bfc2ff",
+                    "surface-dim": "#cbdbf5",
+                    "on-tertiary-fixed-variant": "#82271c",
+                    "status-warning": "#F59E0B",
+                    "surface-bg": "#F8FAFC",
+                    "secondary": "#006e2f",
+                    "on-tertiary-fixed": "#410000",
+                    "secondary-container": "#6bff8f",
+                    "on-primary-fixed": "#00006e",
+                    "on-background": "#0b1c30",
+                    "on-secondary-fixed-variant": "#005321",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed-variant": "#3239a3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "card-gap": "16px",
+                    "base": "4px",
+                    "section-margin": "32px",
+                    "gutter-grid": "20px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "mono-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid #E2E8F0;
+        }
+        .active-tab {
+            border-left: 4px solid #000080;
+            background-color: #eff4ff;
+            color: #00003c;
+            font-weight: 600;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface-bg text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-white border-r border-outline-variant flex flex-col py-6 space-y-4 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm font-bold text-brand-navy">CAFI Insurance</h1>
+<p class="text-[10px] uppercase tracking-widest text-outline font-bold">Intelligence Platform</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">chat</span>
+<span class="font-body-md text-body-md">Campañas WhatsApp</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">robot_2</span>
+<span class="font-body-md text-body-md">Llamadas IA</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-body-md text-body-md">Clientes</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">calendar_today</span>
+<span class="font-body-md text-body-md">Calendario</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">extension</span>
+<span class="font-body-md text-body-md">Integraciones</span>
+</a>
+</nav>
+<div class="px-4 mt-auto pt-6 border-t border-outline-variant space-y-1">
+<a class="flex items-center px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body-md text-body-md">Configuración</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">help</span>
+<span class="font-body-md text-body-md">Ayuda</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] min-h-screen">
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 flex justify-between items-center px-8 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-extrabold text-brand-navy">Configuración del Sistema</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-sm font-bold text-brand-navy">Carlos Mendoza</p>
+<p class="text-[10px] text-outline font-semibold uppercase">Administrador</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-fixed object-cover" data-alt="A high-end corporate headshot of a professional man in his 40s wearing a modern tailored suit, set against a blurred minimalist office background with soft blue and white lighting. The image style is polished and high-trust, perfectly aligned with a professional financial technology platform aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbZIDa3jWiAmoPnN2aOzp8btQ6X1a7zTX2i-_XXrHTslQns7KQft54MRtDD0w-gLQCAU15dDifwFp3lBqX8GvRY4b4L_vmEY_85YU2-YoDdeRo907SVcbkhmJ1NCNKIIFEoZUMzkyUw3xwQXr7KRadZnwLBDDr3ufhxHKHE-ls6rZLcbuP-foUIlB4-f8PFPzCI7klv_xq_gPZ39Y5XCaR8DcrAuwL2Y9wl9I4LHXudVPXm57fSU8QSBJymLFWjMTZBvhyw_FuECM">
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="pt-24 px-8 pb-12 max-w-[1400px]">
+<div class="flex gap-8">
+<!-- Navigation Tabs (Internal) -->
+<div class="w-64 shrink-0 flex flex-col gap-2">
+<button class="tab-btn active-tab flex items-center justify-between w-full px-4 py-4 rounded-lg transition-all duration-200" id="tab-usuarios" onclick="switchTab('usuarios')">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-3">manage_accounts</span>
+<span class="font-body-md">Gestión de Usuarios</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="tab-btn flex items-center justify-between w-full px-4 py-4 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" id="tab-sucursales" onclick="switchTab('sucursales')">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-3">store</span>
+<span class="font-body-md">Sucursales</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="tab-btn flex items-center justify-between w-full px-4 py-4 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" id="tab-notificaciones" onclick="switchTab('notificaciones')">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-3">hub</span>
+<span class="font-body-md">Reglas Globales</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="tab-btn flex items-center justify-between w-full px-4 py-4 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" id="tab-branding" onclick="switchTab('branding')">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-3">palette</span>
+<span class="font-body-md">Preferencias de Marca</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<!-- Tab Content Panel -->
+<div class="flex-1">
+<!-- Section: Usuarios -->
+<div class="tab-content" id="content-usuarios">
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-brand-navy">Gestión de Usuarios</h2>
+<p class="text-on-surface-variant text-body-md">Controla el acceso y roles de tu equipo de seguros.</p>
+</div>
+<button class="bg-brand-navy text-white px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">person_add</span>
+<span>Invitar Usuario</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-on-surface-variant text-xs uppercase tracking-widest font-bold">
+<tr>
+<th class="px-6 py-4">Usuario</th>
+<th class="px-6 py-4">Rol</th>
+<th class="px-6 py-4">Sucursal</th>
+<th class="px-6 py-4">Última Actividad</th>
+<th class="px-6 py-4 text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-brand-navy font-bold text-xs">AM</div>
+<div>
+<p class="font-bold text-brand-navy">Andrés Martínez</p>
+<p class="text-xs text-outline">andres.m@cafi.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-brand-navy text-white text-[10px] font-bold uppercase">Admin</span>
+</td>
+<td class="px-6 py-4 text-body-md">CDMX Central</td>
+<td class="px-6 py-4 text-body-md text-outline">Hace 10 min</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-outline-variant hover:text-status-critical transition-colors ml-3"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">SV</div>
+<div>
+<p class="font-bold text-brand-navy">Sofía Vargas</p>
+<p class="text-xs text-outline">s.vargas@cafi.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-secondary text-white text-[10px] font-bold uppercase">Supervisor</span>
+</td>
+<td class="px-6 py-4 text-body-md">Guadalajara</td>
+<td class="px-6 py-4 text-body-md text-outline">Ayer, 18:24</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-outline-variant hover:text-status-critical transition-colors ml-3"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-primary-container font-bold text-xs">JG</div>
+<div>
+<p class="font-bold text-brand-navy">Jorge García</p>
+<p class="text-xs text-outline">j.garcia@cafi.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-outline-variant text-on-surface-variant text-[10px] font-bold uppercase">Asesor</span>
+</td>
+<td class="px-6 py-4 text-body-md">Monterrey</td>
+<td class="px-6 py-4 text-body-md text-outline">Hace 3 horas</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-outline-variant hover:text-status-critical transition-colors ml-3"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Section: Sucursales -->
+<div class="tab-content hidden" id="content-sucursales">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-brand-navy">CDMX Central</h3>
+<span class="px-2 py-1 bg-brand-green/10 text-brand-green text-[10px] font-bold rounded uppercase">Matriz</span>
+</div>
+<div class="space-y-3 text-body-md text-on-surface-variant">
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">location_on</span> Paseo de la Reforma 222, CDMX</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">phone</span> +52 55 1234 5678</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">group</span> 12 Agentes Activos</p>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant flex justify-end gap-2">
+<button class="text-brand-navy font-bold text-sm hover:underline">Configurar IP</button>
+<button class="px-4 py-2 bg-surface-container-low rounded-lg text-brand-navy font-bold text-sm">Editar</button>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-brand-navy">Guadalajara</h3>
+<span class="px-2 py-1 bg-outline-variant/10 text-outline text-[10px] font-bold rounded uppercase">Sucursal</span>
+</div>
+<div class="space-y-3 text-body-md text-on-surface-variant">
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">location_on</span> Av. Vallarta 3000, Zapopan</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">phone</span> +52 33 8765 4321</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">group</span> 8 Agentes Activos</p>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant flex justify-end gap-2">
+<button class="text-brand-navy font-bold text-sm hover:underline">Configurar IP</button>
+<button class="px-4 py-2 bg-surface-container-low rounded-lg text-brand-navy font-bold text-sm">Editar</button>
+</div>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center group hover:border-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-primary mb-2">add_location_alt</span>
+<p class="font-bold text-outline group-hover:text-primary">Agregar Nueva Sucursal</p>
+</div>
+</div>
+</div>
+<!-- Section: Reglas Globales -->
+<div class="tab-content hidden" id="content-notificaciones">
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm p-8 space-y-8">
+<div>
+<h2 class="font-headline-sm text-brand-navy">Reglas Globales de Notificación</h2>
+<p class="text-on-surface-variant text-body-md">Configura cómo y cuándo el sistema interactúa automáticamente con los clientes.</p>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface-container-lowest border border-outline-variant">
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-brand-navy">
+<span class="material-symbols-outlined">notification_important</span>
+</div>
+<div>
+<p class="font-bold text-brand-navy">Recordatorio de Vencimiento Próximo</p>
+<p class="text-sm text-on-surface-variant">Enviar notificación WhatsApp 30 días antes de la fecha de renovación.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface-container-lowest border border-outline-variant">
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">robot</span>
+</div>
+<div>
+<p class="font-bold text-brand-navy">Escalamiento por IA (ElevenLabs)</p>
+<p class="text-sm text-on-surface-variant">Llamada automatizada si no hay respuesta a 3 mensajes de WhatsApp.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface-container-lowest border border-outline-variant opacity-60">
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="font-bold text-brand-navy">Correo Electrónico de Cortesía</p>
+<p class="text-sm text-on-surface-variant">Mensaje de "Bienvenido" tras la renovación exitosa.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-14 h-7 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-brand-green"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Branding -->
+<div class="tab-content hidden" id="content-branding">
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm p-8">
+<h2 class="font-headline-sm text-brand-navy mb-8">Preferencias de Marca</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-bold text-on-surface-variant mb-2">Logotipo de la Agencia</label>
+<div class="flex items-center gap-6 p-4 border border-outline-variant rounded-lg">
+<img class="h-16 w-16 object-contain" data-alt="A minimalist professional insurance logo design featuring clean geometric lines, centered on a pristine white background. The logo embodies security, trust, and intelligence using deep navy blue and emerald green. High resolution 3D render style with soft shadows, representing a high-trust financial services company." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAasQOUO5rCctt2arBsZZPX1kVfVDAoyXQt1BOXyPRgy4CPpWAmraAXEYB0IEBjQUzOWSd7JmOFq0KDz4rMy0mi5AOzxSn_1PVd-hRfEL4j5HUv0U-uWQF21pdUcFrHow_UiaiWNhwfCSGgV-R8sVX41_pVEM6eOgjkXiURs_-QqvHr2pVG_zAo_hLJD9HUE0y5SNq6tmhySgHTZTZ3aEQzuTFi1z31QmxYxUtCDjr32lvgqDXjT84ft3KUfU1zvOQdG7JCU1DhU4E">
+<div>
+<button class="bg-surface-container-low text-brand-navy px-4 py-2 rounded font-bold text-sm">Cambiar Logo</button>
+<p class="text-[10px] text-outline mt-1 italic">PNG, SVG (Max 500kb)</p>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-bold text-on-surface-variant mb-4">Colores Corporativos</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#000080] border border-outline-variant shadow-inner"></div>
+<div class="text-xs">
+<p class="font-bold">Primario</p>
+<p class="text-outline uppercase">#000080</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#22C55E] border border-outline-variant shadow-inner"></div>
+<div class="text-xs">
+<p class="font-bold">Secundario</p>
+<p class="text-outline uppercase">#22C55E</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-bold text-on-surface-variant mb-2">Pie de Firma de Mensajes (WhatsApp)</label>
+<textarea class="w-full h-32 p-4 border border-outline-variant rounded-lg font-body-md text-sm focus:ring-2 focus:ring-brand-navy/20 outline-none transition-all" placeholder="Escribe la firma que aparecerá al final de todos los mensajes automatizados..."></textarea>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-xs font-bold text-brand-navy mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">preview</span> Previsualización de Mensaje
+                                        </p>
+<div class="bg-white p-3 rounded shadow-sm text-xs text-on-surface-variant leading-relaxed">
+                                            Hola Sr. García, le recordamos que su póliza de auto vence en 15 días...<br><br>
+<span class="font-bold text-brand-navy italic">— CAFI Insurance: Siempre Asegurado.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-6 border-t border-outline-variant flex justify-end">
+<button class="bg-brand-navy text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-brand-navy/20 hover:scale-105 active:scale-95 transition-all">
+                                    Guardar Preferencias
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active classes from buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active-tab');
+                btn.classList.add('text-on-surface-variant');
+                btn.classList.remove('bg-surface-container-low');
+            });
+
+            // Show current content
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+            
+            // Set active button
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('text-on-surface-variant');
+        }
+    </script>
+</body></html>
